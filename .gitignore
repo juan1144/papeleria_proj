@@ -1,0 +1,20 @@
+# Ignorar el entorno virtual
+myVenv/
+env/
+venv/
+
+# Ignorar archivos de bases de datos locales
+*.sqlite3
+
+# Ignorar archivos compilados de Python
+__pycache__/
+*.pyc
+
+# Ignorar configuraciones de IDE
+.vscode/
+.idea/
+
+# Ignorar otros archivos innecesarios
+*.log
+*.pot
+*.mo
