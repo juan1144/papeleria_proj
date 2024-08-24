@@ -3,16 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}Home{% endblock %}</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
-    />
-    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/inventory.css' %}">
-    {% block extra_head %}{% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Default Title{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
   </head>
   <body>
     <div class="container">
@@ -64,9 +59,9 @@
           <div class="controls">
             <form method="POST" action="{% url 'logout' %}">
               {% csrf_token %}
-              <button type="submit" class="button">Logout</button>
+              <button type="submit" class="button">Cerrar Sesión</button>
             </form>
-            <a data-dialog-action="cancel" href="#" class="button">Cancel</a>
+            <a data-dialog-action="cancel" href="#" class="button">Cancelar</a>
           </div>
         </div>
       </div>

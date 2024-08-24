@@ -1,8 +1,8 @@
-from django.shortcuts import render
-from django.db.models import Q
+from django.shortcuts import render,redirect
 from django.core.paginator import Paginator
 from .models import Inventario
 from products.models import Producto
+from django.contrib import messages
 
 def view_inventory(request):
     inventarios = Inventario.objects.all()
@@ -45,5 +45,55 @@ def view_inventory(request):
 
 
 def add_inventory(request):
-    # Lógica para agregar al inventario
-    return render(request, 'inventory/add_inventory.html')
+    productos = Producto.objects.all()
+    
+    if request.method == 'POST':
+        producto_id = request.POST.get('producto')
+        cambio = request.POST.get('cambio')
+        tipo_cambio = request.POST.get('tipo_cambio')
+        motivo = request.POST.get('motivo')
+
+        if not producto_id or not cambio or not tipo_cambio:
+            messages.error(request, "Todos los campos son obligatorios.")
+            return render(request, 'inventory/add_inventory.html', {'productos': productos, 'producto_id': producto_id, 'cambio': cambio, 'tipo_cambio': tipo_cambio, 'motivo': motivo})
+
+        try:
+            producto = Producto.objects.get(id=producto_id)
+        except Producto.DoesNotExist:
+            messages.error(request, "El producto seleccionado no existe.")
+            return redirect('add_inventory')
+
+        cambio = int(cambio)
+        
+        # Validar y ajustar el stock
+        if tipo_cambio == 'entrada':
+            producto.stock += cambio
+            producto.save()
+        elif tipo_cambio == 'salida':
+            if producto.stock >= cambio:
+                producto.stock -= cambio
+                producto.save()
+            else:
+                messages.error(request, f"No hay suficiente stock para realizar la salida. Stock actual: {producto.stock}.")
+                return render(request, 'inventory/add_inventory.html', {'productos': productos, 'producto_id': producto_id, 'cambio': cambio, 'tipo_cambio': tipo_cambio, 'motivo': motivo})
+
+        # Registrar el movimiento en la tabla de inventarios
+        Inventario.objects.create(
+            producto=producto,
+            cambio=cambio,
+            tipo_cambio=tipo_cambio,
+            motivo=motivo,
+            usuario=request.user
+        )
+
+        messages.success(request, "Inventario actualizado correctamente.")
+        return redirect('view_inventory')
+
+    full_name = f"{request.user.nombre} {request.user.apellido}" if request.user.is_authenticated else ""
+    
+    context = {
+        'productos': productos,
+        'full_name': full_name,
+    }
+    return render(request, 'inventory/add_inventory.html', context)
+

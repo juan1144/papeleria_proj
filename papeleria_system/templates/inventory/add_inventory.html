@@ -1,0 +1,73 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Agregar Inventario{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/add_inventory.css' %}">
+
+<div class="inventory-container">
+    <h1>Agregar Inventario</h1>
+
+    <!-- Mostrar mensajes de error o éxito -->
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="producto">Producto:</label>
+            <select name="producto" id="producto" class="select2">
+                <option value="">Seleccione un producto</option>
+                {% for producto in productos %}
+                <option value="{{ producto.id }}" {% if producto.id == producto_id %}selected{% endif %}>
+                    {{ producto.nombre }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="cambio">Cantidad:</label>
+            <input type="number" name="cambio" id="cambio" value="{{ cambio }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tipo_cambio">Tipo de Transacción:</label>
+            <select name="tipo_cambio" id="tipo_cambio" required>
+                <option value="">Seleccione un tipo de transacción</option>
+                <option value="entrada" {% if tipo_cambio == 'entrada' %}selected{% endif %}>Entrada</option>
+                <option value="salida" {% if tipo_cambio == 'salida' %}selected{% endif %}>Salida</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="motivo">Motivo:</label>
+            <input type="text" name="motivo" id="motivo" value="{{ motivo }}">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="submit-button">Agregar al Inventario</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Asegúrate de que Select2 se inicialice correctamente en el elemento
+        $('#producto').select2({
+            placeholder: 'Seleccione un producto',
+            allowClear: true,
+            width: '100%'  // Asegura que Select2 ocupe todo el ancho del contenedor
+        });
+    });
+</script>
+{% endblock %}

@@ -1,94 +1,95 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block title %}Ver Inventario{% endblock %}
 
-
-
 {% block content %}
-<div class="inventory-container">
-    <h1>Ver Inventario</h1>
+    <link rel="stylesheet" href="{% static 'css/inventory.css' %}">
 
-    <form method="get" class="filter-form">
-        <div class="filter-group">
-            <label for="producto">Producto:</label>
-            <select name="producto" id="producto" class="select2">
-                <option value="">Todos</option>
-                {% for producto in productos %}
-                <option value="{{ producto.id }}" {% if producto.id == producto_id %}selected{% endif %}>
-                    {{ producto.nombre }}
-                </option>
+    <div class="inventory-container">
+        <h1>Ver Inventario</h1>
+
+        <form method="get" class="filter-form">
+            <div class="filter-group">
+                <label for="producto">Producto:</label>
+                <select name="producto" id="producto" class="select2">
+                    <option value="">Todos</option>
+                    {% for producto in productos %}
+                    <option value="{{ producto.id }}" {% if producto.id == producto_id %}selected{% endif %}>
+                        {{ producto.nombre }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="fecha_desde">Fecha Desde:</label>
+                <input type="date" name="fecha_desde" id="fecha_desde" value="{{ fecha_desde }}">
+            </div>
+            
+            <div class="filter-group">
+                <label for="fecha_hasta">Fecha Hasta:</label>
+                <input type="date" name="fecha_hasta" id="fecha_hasta" value="{{ fecha_hasta }}">
+            </div>
+            
+            <div class="filter-group">
+                <label for="tipo_cambio">Tipo de Transacción:</label>
+                <select name="tipo_cambio" id="tipo_cambio">
+                    <option value="">Todos</option>
+                    <option value="entrada" {% if tipo_cambio == 'entrada' %}selected{% endif %}>Entrada</option>
+                    <option value="salida" {% if tipo_cambio == 'salida' %}selected{% endif %}>Salida</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <button type="submit" class="filter-button">Filtrar</button>
+                <a href="{% url 'view_inventory' %}" class="clear-button">Limpiar Filtros</a>
+            </div>
+        </form>
+
+        <table class="inventory-table">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Tipo de Transacción</th>
+                    <th>Motivo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inventario in inventarios %}
+                <tr>
+                    <td>{{ inventario.creado_en|date:"d-m-Y H:i" }}</td>
+                    <td>{{ inventario.producto.nombre }}</td>
+                    <td>{{ inventario.cambio }}</td>
+                    <td>{{ inventario.tipo_cambio|capfirst }}</td>
+                    <td>{{ inventario.motivo }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No se encontraron resultados.</td>
+                </tr>
                 {% endfor %}
-            </select>
-        </div>
-        
-        <div class="filter-group">
-            <label for="fecha_desde">Fecha Desde:</label>
-            <input type="date" name="fecha_desde" id="fecha_desde" value="{{ fecha_desde }}">
-        </div>
-        
-        <div class="filter-group">
-            <label for="fecha_hasta">Fecha Hasta:</label>
-            <input type="date" name="fecha_hasta" id="fecha_hasta" value="{{ fecha_hasta }}">
-        </div>
-        
-        <div class="filter-group">
-            <label for="tipo_cambio">Tipo de Transacción:</label>
-            <select name="tipo_cambio" id="tipo_cambio">
-                <option value="">Todos</option>
-                <option value="entrada" {% if tipo_cambio == 'entrada' %}selected{% endif %}>Entrada</option>
-                <option value="salida" {% if tipo_cambio == 'salida' %}selected{% endif %}>Salida</option>
-            </select>
-        </div>
+            </tbody>
+        </table>
 
-        <div class="filter-group">
-            <button type="submit" class="filter-button">Filtrar</button>
-            <a href="{% url 'view_inventory' %}" class="clear-button">Limpiar Filtros</a>
-        </div>
-    </form>
+        <div class="pagination">
+            <span class="step-links">
+                {% if inventarios.has_previous %}
+                    <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page=1">&laquo; primero</a>
+                    <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ inventarios.previous_page_number }}">anterior</a>
+                {% endif %}
 
-    <table class="inventory-table">
-        <thead>
-            <tr>
-                <th>Fecha</th>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Tipo de Transacción</th>
-                <th>Motivo</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for inventario in inventarios %}
-            <tr>
-                <td>{{ inventario.creado_en|date:"d-m-Y H:i" }}</td>
-                <td>{{ inventario.producto.nombre }}</td>
-                <td>{{ inventario.cambio }}</td>
-                <td>{{ inventario.tipo_cambio|capfirst }}</td>
-                <td>{{ inventario.motivo }}</td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="5">No se encontraron resultados.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                <span class="current">
+                    Página {{ inventarios.number }} de {{ inventarios.paginator.num_pages }}.
+                </span>
 
-    <div class="pagination">
-        <span class="step-links">
-            {% if inventarios.has_previous %}
-                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page=1">&laquo; primero</a>
-                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ inventarios.previous_page_number }}">anterior</a>
-            {% endif %}
-
-            <span class="current">
-                Página {{ inventarios.number }} de {{ inventarios.paginator.num_pages }}.
+                {% if inventarios.has_next %}
+                    <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ inventarios.next_page_number }}">siguiente</a>
+                    <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ inventarios.paginator.num_pages }}">&uarr; último</a>
+                {% endif %}
             </span>
-
-            {% if inventarios.has_next %}
-                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ inventarios.next_page_number }}">siguiente</a>
-                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ inventarios.paginator.num_pages }}">&uarr; último</a>
-            {% endif %}
-        </span>
+        </div>
     </div>
-</div>
 {% endblock %}
