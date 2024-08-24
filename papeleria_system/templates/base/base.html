@@ -11,6 +11,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
     />
     <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/inventory.css' %}">
     {% block extra_head %}{% endblock %}
   </head>
   <body>
@@ -18,17 +19,34 @@
       <div class="drawer">
         <a class="navicon" href="#"><i class="icon ion-navicon"></i></a>
         <div class="menu">
-          <a data-menu="home" href="{% url 'home' %}" class="active"
-            ><i class="icon ion-home"></i
-          ></a>
-          <a data-menu="products" href="#"><i class="icon ion-ios-box"></i></a>
-          <a data-menu="inventory" href="#"
-            ><i class="icon ion-ios-list"></i
-          ></a>
+          <a data-menu="home" href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+            <i class="icon ion-home"></i>
+          </a>
+
+          <div class="submenu">
+            <a href="#" class="menu-item {% if request.resolver_match.url_name == 'view_products' or request.resolver_match.url_name == 'add_product' %}active{% endif %}">
+              <i class="icon ion-ios-box"></i>
+            </a>
+            <div class="submenu-items">
+              <a href="{% url 'view_products' %}">Ver productos</a>
+              <a href="{% url 'add_product' %}">Agregar producto</a>
+            </div>
+          </div>
+
+          <div class="submenu">
+            <a href="#" class="menu-item {% if request.resolver_match.url_name == 'view_inventory' or request.resolver_match.url_name == 'add_inventory' %}active{% endif %}">
+              <i class="icon ion-ios-list"></i>
+            </a>
+            <div class="submenu-items">
+              <a href="{% url 'view_inventory' %}">Ver inventario</a>
+              <a href="{% url 'add_inventory' %}">Agregar inventario</a>
+            </div>
+          </div>
+
           <a data-menu="sales" href="#"><i class="icon ion-cash"></i></a>
-          <a data-menu="clients" href="#"
-            ><i class="icon ion-ios-people"></i
-          ></a>
+          <a data-menu="clients" href="#">
+            <i class="icon ion-ios-people"></i>
+          </a>
           <a data-menu="reports" href="#"><i class="icon ion-ios-paper"></i></a>
           <a data-dialog="logout" href="#"><i class="icon ion-log-out"></i></a>
         </div>
@@ -42,7 +60,7 @@
       <div class="sidebar"></div>
       <div class="dialog">
         <div class="dialog-block">
-          <h2>Are you sure you want to logout?</h2>
+          <h2>¿Estás seguro que quieres cerrar sesión?</h2>
           <div class="controls">
             <form method="POST" action="{% url 'logout' %}">
               {% csrf_token %}

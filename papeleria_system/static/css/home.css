@@ -63,16 +63,18 @@ html, body {
   width: 100px;
 }
 
-.menu a {
-  display: block;
-  width: 100px;
+.menu a, .menu .menu-item {
+  display: flex;  /* Cambiado de block a flex para mejor control del contenido */
+  align-items: center;
+  justify-content: center;  /* Centra los iconos dentro de cada enlace */
+  width: 100%;  /* Asegura que el enlace ocupe todo el ancho del sidebar */
   height: 50px;
-  line-height: 50px;
   text-align: center;
   color: var(--text-primary);
   font-size: 25px;
   opacity: 0.6;
   transition: all 0.22s ease;
+  box-sizing: border-box;  /* Incluye padding y border en el ancho total */
 }
 
 .menu a.active {
@@ -82,9 +84,10 @@ html, body {
 }
 
 .menu a i {
-  display: block;
+  display: inline-block;  /* Asegura que los iconos se comporten como elementos en línea dentro del flex */
+  width: 40px;  /* Ajusta el ancho del icono para que no se salga del contenedor */
+  height: 40px;
   margin: 0 auto;
-  width: 50px;
   border-radius: 2px;
 }
 
@@ -93,8 +96,11 @@ html, body {
   animation: 0.3s ease-out 0s 1 fadeIn;
 }
 
-.menu a:hover {
+.menu a:hover, .menu .menu-item:hover {
   opacity: 1;
+  background-color: var(--background-secondary);
+  width: 100%;  /* Asegura que el efecto hover ocupe todo el ancho del sidebar */
+  box-sizing: border-box;  /* Incluye padding y border en el ancho total */
 }
 
 .username {
@@ -266,4 +272,62 @@ html, body {
   100% {
     background: var(--accent-primary);
   }
+}
+
+.submenu {
+  position: relative;
+}
+
+.submenu-items {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: var(--background-primary);
+  border: 1px solid var(--background-secondary);
+  z-index: 1000;
+  width: 125px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.submenu-items a {
+  display: block;
+  padding: 8px 12px; /* Ajuste del padding para reducir el espacio */
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 12px; /* Reducir el tamaño de la fuente */
+  transition: background 0.3s ease;
+}
+
+.submenu-items a:hover {
+  background-color: var(--accent-primary);
+  font-size: 12px; /* Asegurar que el tamaño de la fuente sea consistente al hacer hover */
+}
+
+
+.submenu:hover .submenu-items {
+  display: block;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 10px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 18px;
+  transition: background 0.3s ease;
+}
+
+.menu-item i {
+  margin-right: 10px;
+}
+
+.menu-item:hover {
+  background-color: var(--background-secondary);
+}
+
+.submenu-items a i {
+  margin-right: 8px;
 }
