@@ -1,0 +1,58 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Alerta de Stock{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/alerta_stock.css' %}">
+<div class="inventory-container">
+    <h1>Alerta de Stock</h1>
+
+    <table class="inventory-table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Stock Actual</th>
+                <th>Umbral</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos_bajo_stock %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.categoria.nombre }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>{{ producto.umbral_stock }}</td>
+                <td>
+                    <a href="{% url 'add_inventory' %}?producto={{ producto.id }}" class="add-stock-button">Agregar Stock</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No hay productos con bajo stock.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if productos_bajo_stock.has_previous %}
+                <a href="?page=1">&laquo; primero</a>
+                <a href="?page={{ productos_bajo_stock.previous_page_number }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ productos_bajo_stock.number }} de {{ productos_bajo_stock.paginator.num_pages }}.
+            </span>
+
+            {% if productos_bajo_stock.has_next %}
+                <a href="?page={{ productos_bajo_stock.next_page_number }}">siguiente</a>
+                <a href="?page={{ productos_bajo_stock.paginator.num_pages }}">&uarr; último</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}

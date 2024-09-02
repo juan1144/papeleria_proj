@@ -1,0 +1,76 @@
+.inventory-container {
+    padding: 20px;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+    border-radius: 8px;
+}
+
+.inventory-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.inventory-table th, .inventory-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--background-secondary);
+}
+
+.inventory-table th {
+    background-color: var(--background-secondary);
+}
+
+.inventory-table tr:nth-child(even) {
+    background-color: var(--background-secondary);
+}
+
+.inventory-table tr:hover {
+    background-color: var(--background-secondary);
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.step-links {
+    display: flex;
+    gap: 10px;
+}
+
+.step-links a, .step-links span {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.step-links a:hover {
+    background-color: var(--accent-primary);
+}
+
+.add-stock-button {
+    padding: 8px 12px;
+    background-color: var(--accent-primary);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.add-stock-button:hover {
+    background-color: darken(var(--accent-primary), 10%);
+}

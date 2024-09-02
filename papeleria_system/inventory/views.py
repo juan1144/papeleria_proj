@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from .models import Inventario
 from products.models import Producto
 from django.contrib import messages
+from django.db.models import F
 
 def view_inventory(request):
     inventarios = Inventario.objects.all()
@@ -97,3 +98,19 @@ def add_inventory(request):
     }
     return render(request, 'inventory/add_inventory.html', context)
 
+def alerta_stock(request):
+    # Filtramos los productos que están por debajo o en el umbral de stock
+    productos_bajo_stock = Producto.objects.filter(stock__lte=F('umbral_stock'))
+
+    # Paginación
+    paginator = Paginator(productos_bajo_stock, 10)  # Mostrar 10 productos por página
+    page_number = request.GET.get('page')
+    productos_bajo_stock = paginator.get_page(page_number)
+
+    full_name = f"{request.user.nombre} {request.user.apellido}" if request.user.is_authenticated else ""
+
+    context = {
+        'productos_bajo_stock': productos_bajo_stock,
+        'full_name': full_name,
+    }
+    return render(request, 'inventory/alerta_stock.html', context)

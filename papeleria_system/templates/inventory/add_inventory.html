@@ -1,13 +1,13 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-{% block title %}Agregar Inventario{% endblock %}
+{% block title %}Control de Inventario{% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/add_inventory.css' %}">
 
 <div class="inventory-container">
-    <h1>Agregar Inventario</h1>
+    <h1>Control de Inventario</h1>
 
     <!-- Mostrar mensajes de error o éxito -->
     {% if messages %}
@@ -52,7 +52,7 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="submit-button">Agregar al Inventario</button>
+            <button type="submit" class="submit-button">Realizar cambios</button>
         </div>
     </form>
 </div>
