@@ -1,12 +1,88 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+
+        :root {
+            --drawer: #16191C;
+            --text-primary: #FFFFFF;
+            --text-secondary: #86909A;
+            --text-faded: #C3C5C7;
+            --background-primary: #22272B;
+            --background-secondary: #374148;
+            --accent-primary: rgba(54,80,209,1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--background-primary);
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-primary);
+        }
+
+        .container {
+            background-color: var(--background-secondary);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--text-primary);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"], input[type="password"] {
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: var(--background-primary);
+            color: var(--text-primary);
+        }
+
+        button {
+            padding: 15px;
+            background-color: var(--accent-primary);
+            border: none;
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3650d1;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border: 2px solid var(--accent-primary);
+        }
+
+        .container p {
+            color: var(--text-secondary);
+        }
+    </style>
 </head>
 <body>
     <div class="container">

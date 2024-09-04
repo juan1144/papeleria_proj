@@ -1,0 +1,220 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Registrar Venta{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/ventas_registro.css' %}">
+<div class="sales-container">
+    <h1>Registrar Venta</h1>
+
+    <!-- Sección de Información del Cliente -->
+    <div class="section cliente-section">
+        <h2>Información del Cliente</h2>
+        <div class="form-group">
+            <label for="dui">DUI del Cliente:</label>
+            <input type="text" id="dui" name="dui" placeholder="Ingrese el DUI">
+            <button type="button" id="buscar-cliente-button">Buscar Cliente</button>
+        </div>
+
+        <div id="cliente-info">
+            <p>Nombre: <span id="nombre-cliente">-</span></p>
+            <p>Apellido: <span id="apellido-cliente">-</span></p>
+            <p>Correo: <span id="correo-cliente">-</span></p>
+            <p>Teléfono: <span id="telefono-cliente">-</span></p>
+        </div>
+
+        <!-- Campo oculto para almacenar el ID del cliente -->
+        <input type="hidden" id="cliente-id" name="cliente_id">
+    </div>
+
+    <!-- Sección de Productos -->
+    <div class="section productos-section" id="productos-container">
+        <h2>Productos a Comprar</h2>
+        <div class="form-group">
+            <label for="producto">Producto:</label>
+            <select id="producto" name="producto_id" class="select2" required>
+                <option value="">Seleccione un producto</option>
+                {% for producto in productos %}
+                <option value="{{ producto.id }}" data-precio="{{ producto.precio }}">{{ producto.nombre }}</option>
+                {% endfor %}
+            </select>
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" id="cantidad" name="cantidad" min="1" required>
+            <button type="button" class="add-product-button">Agregar Producto</button>
+        </div>
+    </div>
+
+    <!-- Sección de Detalle de Venta -->
+    <div class="section detalle-venta-section" id="detalle-productos">
+        <h2>Detalle de Venta</h2>
+        <table class="detalle-venta">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="lista-detalle">
+                <!-- Aquí se llenará dinámicamente con JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-group total-group">
+        <h2>Total: $<span id="total-venta">0.00</span></h2>
+        <button type="submit" name="registrar_venta" class="submit-button">Registrar Venta</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.select2').select2();
+
+        let totalVenta = 0;
+
+        function actualizarTotal() {
+            totalVenta = 0;
+            $('#lista-detalle tr').each(function () {
+                const cantidad = parseInt($(this).find('.cantidad-input').val());
+                const precioUnitario = parseFloat($(this).find('.precio-unitario').text().replace('$', ''));
+                const total = cantidad * precioUnitario;
+                $(this).find('.total-producto').text('$' + total.toFixed(2));
+                totalVenta += total;
+            });
+            $('#total-venta').text(totalVenta.toFixed(2));
+        }
+
+        $('#buscar-cliente-button').on('click', function () {
+            var dui = $('#dui').val();
+            if (dui) {
+                $.ajax({
+                    url: "{% url 'registrar_venta' %}",
+                    method: "POST",
+                    data: {
+                        'dui': dui,
+                        'buscar_cliente': true,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function (data) {
+                        $('#nombre-cliente').text(data.nombre);
+                        $('#apellido-cliente').text(data.apellido);
+                        $('#correo-cliente').text(data.correo);
+                        $('#telefono-cliente').text(data.telefono);
+                        $('#cliente-id').val(data.id); // Guardar el ID del cliente
+                    },
+                    error: function (xhr, errmsg, err) {
+                        alert("Cliente no encontrado.");
+                        $('#nombre-cliente').text("-");
+                        $('#apellido-cliente').text("-");
+                        $('#correo-cliente').text("-");
+                        $('#telefono-cliente').text("-");
+                        $('#cliente-id').val(""); // Limpiar el ID del cliente
+                    }
+                });
+            } else {
+                alert("Por favor, ingrese un DUI.");
+            }
+        });
+
+        $('.add-product-button').on('click', function () {
+            const productoSelect = $('#producto');
+            const cantidadInput = $('#cantidad');
+            const productoId = productoSelect.val();
+            const productoNombre = productoSelect.find('option:selected').text();
+            const precioUnitario = parseFloat(productoSelect.find('option:selected').data('precio'));
+            const cantidad = parseInt(cantidadInput.val());
+
+            if (productoId && cantidad > 0) {
+                const total = precioUnitario * cantidad;
+
+                const nuevoDetalle = `
+            <tr>
+                <td>${productoNombre}</td>
+                <td><input type="number" class="cantidad-input" value="${cantidad}" min="1"></td>
+                <td class="precio-unitario">$${precioUnitario.toFixed(2)}</td>
+                <td class="total-producto">$${total.toFixed(2)}</td>
+                <td><input type="hidden" class="producto-id" value="${productoId}"><button type="button" class="eliminar-producto-button">Eliminar</button></td>
+            </tr>
+        `;
+
+                $('#lista-detalle').append(nuevoDetalle);
+                actualizarTotal();
+
+                productoSelect.val('').trigger('change');
+                cantidadInput.val('');
+            } else {
+                alert("Por favor, seleccione un producto y una cantidad válida.");
+            }
+        });
+
+
+        $(document).on('click', '.eliminar-producto-button', function () {
+            $(this).closest('tr').remove();
+            actualizarTotal();
+        });
+
+        $(document).on('input', '.cantidad-input', function () {
+            actualizarTotal();
+        });
+
+        $('.submit-button').on('click', function (e) {
+            e.preventDefault();
+
+            // Validar si se ha seleccionado un cliente
+            const clienteId = $('#cliente-id').val();
+            if (!clienteId) {
+                alert("Por favor, seleccione un cliente válido.");
+                return;
+            }
+
+            // Validar si hay productos en la lista
+            const productos = $('#lista-detalle tr');
+            if (productos.length === 0) {
+                alert("Por favor, agregue al menos un producto a la venta.");
+                return;
+            }
+
+            // Recoger los datos para enviar
+            const productosIds = [];
+            const cantidades = [];
+            productos.each(function () {
+                const productoId = $(this).find('.producto-id').val();
+                const cantidad = $(this).find('.cantidad-input').val();
+                productosIds.push(productoId);
+                cantidades.push(cantidad);
+            });
+
+            $.ajax({
+                url: "{% url 'registrar_venta' %}",
+                method: "POST",
+                data: {
+                    'registrar_venta': true,
+                    'cliente_id': clienteId,
+                    'producto_id': productosIds,
+                    'cantidad': cantidades,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    if (data.success) {
+                        window.location.href = "{% url 'ver_factura' venta_id=0 %}".replace('0', data.venta_id);
+                    } else if (data.mensaje_error) {
+                        alert(data.mensaje_error);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    alert("Ocurrió un error al registrar la venta.");
+                }
+            });
+        });
+
+
+    });
+</script>
+{% endblock %}

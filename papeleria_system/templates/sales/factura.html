@@ -1,0 +1,73 @@
+{% extends 'base/base.html' %}
+{% block title %}Factura{% endblock %}
+
+{% block content %}
+<div class="factura-container">
+    <h2>Factura de Venta</h2>
+    <h3>Factura para Venta ID: {{ venta.id }}</h3>
+    <p><strong>Cliente:</strong> {{ venta.cliente.nombre }} {{ venta.cliente.apellido }}</p>
+    <p><strong>Fecha:</strong> {{ venta.creado_en|date:"Y-m-d H:i" }}</p>
+
+    <h4>Productos</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detalle in detalles %}
+            <tr>
+                <td>{{ detalle.producto.nombre }}</td>
+                <td>{{ detalle.cantidad }}</td>
+                <td>${{ detalle.precio }}</td>
+                <td>${{ detalle.total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h4>Total: ${{ venta.total }}</h4>
+
+    <button id="btn-imprimir" onclick="imprimirFactura()">Imprimir Factura</button>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Usar JSON pasado desde Django
+    const detalles = JSON.parse('{{ detalles_json|escapejs }}');
+
+    function imprimirFactura() {
+        const ventanaImpresion = window.open('', '', 'width=800,height=600');
+        ventanaImpresion.document.write('<html><head><title>Factura</title></head><body>');
+        ventanaImpresion.document.write('<h2>Factura de Venta</h2>');
+        ventanaImpresion.document.write('<h3>Factura para Venta ID: {{ venta.id }}</h3>');
+        ventanaImpresion.document.write('<p><strong>Cliente:</strong> {{ venta.cliente.nombre }} {{ venta.cliente.apellido }}</p>');
+        ventanaImpresion.document.write('<p><strong>Fecha:</strong> {{ venta.creado_en|date:"Y-m-d H:i" }}</p>');
+        ventanaImpresion.document.write('<h4>Productos</h4>');
+        ventanaImpresion.document.write('<table border="1" cellpadding="5" cellspacing="0">');
+        ventanaImpresion.document.write('<thead><tr><th>Producto</th><th>Cantidad</th><th>Precio Unitario</th><th>Total</th></tr></thead><tbody>');
+
+        // Recorrer los detalles en JavaScript y agregarlos al HTML de la ventana emergente
+        detalles.forEach(function(detalle) {
+            ventanaImpresion.document.write('<tr>');
+            ventanaImpresion.document.write('<td>' + detalle.producto__nombre + '</td>');
+            ventanaImpresion.document.write('<td>' + detalle.cantidad + '</td>');
+            ventanaImpresion.document.write('<td>$' + parseFloat(detalle.precio).toFixed(2) + '</td>');
+            ventanaImpresion.document.write('<td>$' + parseFloat(detalle.total).toFixed(2) + '</td>');
+            ventanaImpresion.document.write('</tr>');
+        });
+
+        ventanaImpresion.document.write('</tbody></table>');
+        ventanaImpresion.document.write('<h4>Total: ${{ venta.total }}</h4>');
+        ventanaImpresion.document.write('</body></html>');
+        ventanaImpresion.document.close();
+        ventanaImpresion.focus();
+        ventanaImpresion.print();
+    }
+</script>
+{% endblock %}

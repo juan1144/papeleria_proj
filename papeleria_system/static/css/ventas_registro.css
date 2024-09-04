@@ -1,0 +1,103 @@
+/* Estilos generales */
+.sales-container {
+    padding: 20px;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+    border-radius: 8px;
+    height: calc(100vh - 40px);
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.sales-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.section {
+    margin-bottom: 30px;
+    border: 1px solid var(--background-secondary);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.section h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-secondary);
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--background-secondary);
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    border-radius: 4px;
+}
+
+#buscar-cliente-button, .add-product-button, .eliminar-producto-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: var(--accent-primary);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#buscar-cliente-button:hover, .add-product-button:hover, .eliminar-producto-button:hover {
+    background-color: darken(var(--accent-primary), 10%);
+}
+
+/* Estilos para la tabla de detalle de venta */
+.detalle-venta {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.detalle-venta th, .detalle-venta td {
+    border: 1px solid var(--background-secondary);
+    padding: 8px;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.total-group {
+    text-align: right;
+    font-size: 20px;
+    color: var(--accent-primary);
+}
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: var(--accent-primary);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: darken(var(--accent-primary), 10%);
+}
+
+/* Ajustes específicos */
+.cantidad-input {
+    width: 60px;
+    text-align: center;
+}

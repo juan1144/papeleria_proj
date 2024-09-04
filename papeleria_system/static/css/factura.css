@@ -1,0 +1,40 @@
+.factura-container {
+    padding: 20px;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+    border-radius: 8px;
+}
+
+.factura-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.factura-container p {
+    margin: 5px 0;
+    color: var(--text-secondary);
+}
+
+.factura-container h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+}
+
+.factura-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.factura-container table, .factura-container th, .factura-container td {
+    border: 1px solid var(--background-secondary);
+    padding: 8px;
+    text-align: center;
+}
+
+.factura-container th {
+    background-color: var(--accent-primary);
+    color: var(--text-primary);
+}

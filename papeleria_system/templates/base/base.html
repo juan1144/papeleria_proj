@@ -39,7 +39,17 @@
             </div>
           </div>
 
-          <a data-menu="sales" href="#"><i class="icon ion-cash"></i></a>
+          <!-- Nuevo submenú para Ventas -->
+          <div class="submenu">
+            <a href="#" class="menu-item {% if request.resolver_match.url_name == 'registrar_venta' %}active{% endif %}">
+              <i class="icon ion-cash"></i>
+            </a>
+            <div class="submenu-items">
+              <a href="{% url 'registrar_venta' %}">Registrar venta</a>
+              <!-- Aquí podrías agregar más opciones en el futuro -->
+            </div>
+          </div>
+
           <a data-menu="clients" href="#">
             <i class="icon ion-ios-people"></i>
           </a>
