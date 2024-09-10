@@ -41,8 +41,8 @@
                 </select>
             </div>
 
-            <div class="filter-group">
-                <button type="submit" class="filter-button">Filtrar</button>
+            <div class="filter-buttons">
+                <button type="submit" class="filter-button">Aplicar Filtros</button>
                 <a href="{% url 'view_inventory' %}" class="clear-button">Limpiar Filtros</a>
             </div>
         </form>
@@ -91,5 +91,7 @@
                 {% endif %}
             </span>
         </div>
+        <br>
+    <br>
     </div>
 {% endblock %}

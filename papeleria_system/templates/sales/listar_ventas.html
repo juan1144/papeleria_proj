@@ -1,0 +1,108 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Listado de Ventas{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/inventory.css' %}">
+<link rel="stylesheet" href="{% static 'css/listar_ventas.css' %}">
+
+<div class="sales-list-container">
+    <h1>Listado de Ventas</h1>
+
+    <form method="get" class="filter-form">
+        <div class="filter-group">
+            <label for="factura_id">ID Factura:</label>
+            <input type="text" name="factura_id" id="factura_id" value="{{ request.GET.factura_id }}">
+        </div>
+
+        <div class="filter-group">
+            <label for="cliente_dui">DUI del Cliente:</label>
+            <input type="text" name="cliente_dui" id="cliente_dui" value="{{ request.GET.cliente_dui }}">
+        </div>
+
+        <div class="filter-group">
+            <label for="fecha_desde">Fecha Desde:</label>
+            <input type="date" name="fecha_desde" id="fecha_desde" value="{{ request.GET.fecha_desde }}">
+        </div>
+
+        <div class="filter-group">
+            <label for="fecha_hasta">Fecha Hasta:</label>
+            <input type="date" name="fecha_hasta" id="fecha_hasta" value="{{ request.GET.fecha_hasta }}">
+        </div>
+
+        <div class="filter-group">
+            <label for="producto">Producto:</label>
+            <input type="text" name="producto" id="producto" value="{{ request.GET.producto }}" placeholder="Buscar producto...">
+        </div>
+
+        <div class="filter-buttons">
+            <button type="submit" class="filter-button">Aplicar Filtros</button>
+            <a href="{% url 'listar_ventas' %}" class="clear-button">Limpiar Filtros</a>
+        </div>
+    </form>
+
+    {% if detalles_ventas %}
+    <table class="sales-table">
+        <thead>
+            <tr>
+                <th>ID Factura</th>
+                <th>Cliente</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venta in ventas %}
+                {% for detalle in detalles_ventas %}
+                    {% if detalle.venta.id == venta.id %}
+                    <tr>
+                        <td>{{ venta.id }}</td>
+                        <td>{{ venta.cliente.nombre }} {{ venta.cliente.apellido }}</td>
+                        <td>{{ detalle.producto.nombre }}</td>
+                        <td>{{ detalle.cantidad }}</td>
+                        <td>${{ detalle.precio }}</td>
+                        <td>{{ venta.creado_en|date:"d-m-Y H:i" }}</td>
+                        <td>${{ venta.total }}</td>
+                        <td>
+                            <a href="{% url 'ver_factura' venta.id %}" class="action-button">Generar Factura</a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            {% empty %}
+            <tr>
+                <td colspan="8">No se encontraron ventas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if detalles_ventas.has_previous %}
+                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page=1">&laquo; primero</a>
+                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ detalles_ventas.previous_page_number }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ detalles_ventas.number }} de {{ detalles_ventas.paginator.num_pages }}.
+            </span>
+
+            {% if detalles_ventas.has_next %}
+                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ detalles_ventas.next_page_number }}">siguiente</a>
+                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ detalles_ventas.paginator.num_pages }}">&uarr; último</a>
+            {% endif %}
+        </span>
+    </div>
+    <br>
+    <br>
+    {% else %}
+        <p>No se encontraron productos que coincidan con "{{ request.GET.producto }}".</p>
+    {% endif %}
+</div>
+{% endblock %}

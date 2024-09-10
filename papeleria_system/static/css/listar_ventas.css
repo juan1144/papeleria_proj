@@ -1,21 +1,17 @@
-.inventory-container {
-    margin-left: 0px;
+/* Estilo del contenedor */
+.sales-list-container {
+    margin-left: 0px; /* Dejamos espacio para el sidebar */
     padding: 20px;
     background-color: var(--background-primary);
     color: var(--text-primary);
     border-radius: 8px;
-    height: 100vh;
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
     display: flex;
-    flex-direction: column;
-    overflow-y: auto; /* Permitir scroll en el contenido */
+    flex-direction: column; /* Aseguramos que los hijos se alineen verticalmente */
+    overflow-y: auto; /* Permite el scroll vertical */
 }
 
-.inventory-container h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: var(--text-primary);
-}
-
+/* Ajuste del formulario de filtros */
 .filter-form {
     display: flex;
     flex-wrap: wrap;
@@ -34,7 +30,7 @@
     color: var(--text-secondary);
 }
 
-.filter-group select, .filter-group input {
+.filter-group input, .filter-group select {
     width: 100%;
     padding: 8px;
     border: 1px solid var(--background-secondary);
@@ -43,10 +39,11 @@
     border-radius: 4px;
 }
 
+/* Botones de filtro y limpieza alineados a la izquierda */
 .filter-buttons {
     display: flex;
     gap: 10px;
-    justify-content: flex-start; /* Alinear botones a la izquierda */
+    justify-content: flex-start; /* Alinea los botones a la izquierda */
 }
 
 .filter-button, .clear-button {
@@ -65,36 +62,55 @@
     background-color: darken(var(--accent-primary), 10%);
 }
 
-.inventory-table {
+/* Tabla de ventas */
+.sales-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    flex-grow: 1;
+    flex-grow: 1; /* Asegura que la tabla ocupe el espacio disponible */
 }
 
-.inventory-table th, .inventory-table td {
+.sales-table th, .sales-table td {
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid var(--background-secondary);
 }
 
-.inventory-table th {
+.sales-table th {
     background-color: var(--background-secondary);
 }
 
-.inventory-table tr:nth-child(even) {
+.sales-table tr:nth-child(even) {
     background-color: var(--background-secondary);
 }
 
-.inventory-table tr:hover {
+.sales-table tr:hover {
     background-color: var(--background-secondary);
 }
 
+/* Estilo para los botones de acción */
+.action-button {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: var(--accent-primary);
+    color: var(--text-primary);
+    border-radius: 4px;
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+.action-button:hover {
+    background-color: darken(var(--accent-primary), 10%);
+}
+
+/* Ajuste para la paginación */
 .pagination {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    bottom: 0;
 }
 
 .step-links {

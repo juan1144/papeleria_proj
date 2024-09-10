@@ -6,6 +6,7 @@ from customers.models import Cliente
 from products.models import Producto
 import json
 from django.core.serializers.json import DjangoJSONEncoder
+from django.core.paginator import Paginator
 
 def registrar_venta(request):
     clientes = Cliente.objects.all()
@@ -99,3 +100,41 @@ def ver_factura(request, venta_id):
     }
 
     return render(request, 'sales/factura.html', context)
+
+def listar_ventas(request):
+    # Obtener todas las ventas y detalles de ventas
+    ventas = Venta.objects.all()
+    detalles_ventas = DetalleVenta.objects.all()
+
+    # Filtros
+    factura_id = request.GET.get('factura_id')
+    cliente_dui = request.GET.get('cliente_dui')
+    fecha_desde = request.GET.get('fecha_desde')
+    fecha_hasta = request.GET.get('fecha_hasta')
+    producto = request.GET.get('producto')
+
+    if factura_id:
+        ventas = ventas.filter(id=factura_id)
+    if cliente_dui:
+        ventas = ventas.filter(cliente__identificacion_personal__icontains=cliente_dui)
+    if fecha_desde and fecha_hasta:
+        ventas = ventas.filter(creado_en__date__range=[fecha_desde, fecha_hasta])
+    if producto:
+        detalles_ventas = detalles_ventas.filter(producto__nombre__icontains=producto)
+
+    # Paginación - Mostrar 8 detalles de ventas por página
+    paginator = Paginator(detalles_ventas, 8)  # Paginar los detalles de venta (productos), no las ventas
+    page_number = request.GET.get('page')
+    detalles_page_obj = paginator.get_page(page_number)
+
+    context = {
+        'ventas': ventas,  # Las ventas filtradas
+        'detalles_ventas': detalles_page_obj,  # Paginamos los detalles
+        'factura_id': factura_id,
+        'cliente_dui': cliente_dui,
+        'fecha_desde': fecha_desde,
+        'fecha_hasta': fecha_hasta,
+        'producto': producto,
+    }
+
+    return render(request, 'sales/listar_ventas.html', context)

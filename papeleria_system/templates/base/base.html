@@ -2,83 +2,92 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Default Title{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-  </head>
-  <body>
-    <div class="container">
-      <div class="drawer">
-        <a class="navicon" href="#"><i class="icon ion-navicon"></i></a>
-        <div class="menu">
-          <a data-menu="home" href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
-            <i class="icon ion-home"></i>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Default Title{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+
+<body>
+  <div class="container">
+    <div class="drawer">
+      <a class="navicon" href="#"><i class="icon ion-navicon"></i></a>
+      <div class="menu">
+        <a data-menu="home" href="{% url 'home' %}"
+          class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+          <i class="icon ion-home"></i>
+        </a>
+
+        <div class="submenu">
+          <a href="#"
+            class="menu-item {% if request.resolver_match.url_name == 'view_products' or request.resolver_match.url_name == 'add_product' %}active{% endif %}">
+            <i class="icon ion-ios-box"></i>
           </a>
-
-          <div class="submenu">
-            <a href="#" class="menu-item {% if request.resolver_match.url_name == 'view_products' or request.resolver_match.url_name == 'add_product' %}active{% endif %}">
-              <i class="icon ion-ios-box"></i>
-            </a>
-            <div class="submenu-items">
-              <a href="{% url 'view_products' %}">Ver productos</a>
-              <a href="{% url 'add_product' %}">Agregar producto</a>
-            </div>
+          <div class="submenu-items">
+            <a href="{% url 'view_products' %}">Ver productos</a>
+            <a href="{% url 'add_product' %}">Agregar producto</a>
           </div>
-
-          <div class="submenu">
-            <a href="#" class="menu-item {% if request.resolver_match.url_name == 'view_inventory' or request.resolver_match.url_name == 'add_inventory' %}active{% endif %}">
-              <i class="icon ion-ios-list"></i>
-            </a>
-            <div class="submenu-items">
-              <a href="{% url 'view_inventory' %}">Ver inventario</a>
-              <a href="{% url 'add_inventory' %}">Control de inventario</a>
-              <a href="{% url 'alerta_stock' %}">Alerta de stock</a>
-            </div>
-          </div>
-
-          <!-- Nuevo submenú para Ventas -->
-          <div class="submenu">
-            <a href="#" class="menu-item {% if request.resolver_match.url_name == 'registrar_venta' %}active{% endif %}">
-              <i class="icon ion-cash"></i>
-            </a>
-            <div class="submenu-items">
-              <a href="{% url 'registrar_venta' %}">Registrar venta</a>
-              <!-- Aquí podrías agregar más opciones en el futuro -->
-            </div>
-          </div>
-
-          <a data-menu="clients" href="#">
-            <i class="icon ion-ios-people"></i>
-          </a>
-          <a data-menu="reports" href="#"><i class="icon ion-ios-paper"></i></a>
-          <a data-dialog="logout" href="#"><i class="icon ion-log-out"></i></a>
         </div>
-        <span class="username">{{ full_name }}</span>
-      </div>
-      <div class="content">
-        {% block content %}
-        <!-- Aquí irá el contenido específico de cada vista -->
-        {% endblock %}
-      </div>
-      <div class="sidebar"></div>
-      <div class="dialog">
-        <div class="dialog-block">
-          <h2>¿Estás seguro que quieres cerrar sesión?</h2>
-          <div class="controls">
-            <form method="POST" action="{% url 'logout' %}">
-              {% csrf_token %}
-              <button type="submit" class="button">Cerrar Sesión</button>
-            </form>
-            <a data-dialog-action="cancel" href="#" class="button">Cancelar</a>
+
+        <div class="submenu">
+          <a href="#"
+            class="menu-item {% if request.resolver_match.url_name == 'view_inventory' or request.resolver_match.url_name == 'add_inventory' %}active{% endif %}">
+            <i class="icon ion-ios-list"></i>
+          </a>
+          <div class="submenu-items">
+            <a href="{% url 'view_inventory' %}">Ver inventario</a>
+            <a href="{% url 'add_inventory' %}">Control de inventario</a>
+            <a href="{% url 'alerta_stock' %}">Alerta de stock</a>
           </div>
+        </div>
+
+        <!-- Nuevo submenú para Ventas -->
+
+        <div class="submenu">
+          <a href="#"
+            class="menu-item {% if request.resolver_match.url_name == 'registrar_venta' or request.resolver_match.url_name == 'listar_ventas' %}active{% endif %}">
+            <i class="icon ion-cash"></i>
+          </a>
+          <div class="submenu-items">
+            <a href="{% url 'registrar_venta' %}">Registrar venta</a>
+            <a href="{% url 'listar_ventas' %}">Listado de ventas</a>
+          </div>
+        </div>
+
+
+        <a data-menu="clients" href="#">
+          <i class="icon ion-ios-people"></i>
+        </a>
+        <a data-menu="reports" href="#"><i class="icon ion-ios-paper"></i></a>
+        <a data-dialog="logout" href="#"><i class="icon ion-log-out"></i></a>
+      </div>
+      <span class="username">{{ full_name }}</span>
+    </div>
+    <div class="content">
+      {% block content %}
+      <!-- Aquí irá el contenido específico de cada vista -->
+      {% endblock %}
+    </div>
+    <div class="sidebar"></div>
+    <div class="dialog">
+      <div class="dialog-block">
+        <h2>¿Estás seguro que quieres cerrar sesión?</h2>
+        <div class="controls">
+          <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="button">Cerrar Sesión</button>
+          </form>
+          <a data-dialog-action="cancel" href="#" class="button">Cancelar</a>
         </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'js/home.js' %}"></script>
-    {% block extra_js %}{% endblock %}
-  </body>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static 'js/home.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+
 </html>
