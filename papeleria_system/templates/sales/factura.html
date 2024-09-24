@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% block title %}Factura{% endblock %}
+{% load math_filters %}
 
 {% block content %}
 <div class="factura-container">
@@ -24,13 +25,13 @@
                 <td>{{ detalle.producto.nombre }}</td>
                 <td>{{ detalle.cantidad }}</td>
                 <td>${{ detalle.precio }}</td>
-                <td>${{ detalle.total }}</td>
+                <td>${{ detalle.cantidad|floatformat:2|multiply:detalle.precio|floatformat:2 }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <h4>Total: ${{ venta.total }}</h4>
+    <h4>Total: ${{ venta.total|floatformat:2 }}</h4>
 
     <button id="btn-imprimir" onclick="imprimirFactura()">Imprimir Factura</button>
 </div>
@@ -38,7 +39,6 @@
 
 {% block extra_js %}
 <script>
-    // Usar JSON pasado desde Django
     const detalles = JSON.parse('{{ detalles_json|escapejs }}');
 
     function imprimirFactura() {
@@ -52,7 +52,6 @@
         ventanaImpresion.document.write('<table border="1" cellpadding="5" cellspacing="0">');
         ventanaImpresion.document.write('<thead><tr><th>Producto</th><th>Cantidad</th><th>Precio Unitario</th><th>Total</th></tr></thead><tbody>');
 
-        // Recorrer los detalles en JavaScript y agregarlos al HTML de la ventana emergente
         detalles.forEach(function(detalle) {
             ventanaImpresion.document.write('<tr>');
             ventanaImpresion.document.write('<td>' + detalle.producto__nombre + '</td>');
