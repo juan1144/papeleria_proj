@@ -23,7 +23,7 @@ def reportes_ventas_categoria(request):
         'producto__categoria'  # Cambiado para acceder al campo de texto de la categoría
     ).annotate(
         cantidad_vendida=Sum('cantidad'),
-        ingreso=Sum(F('cantidad') * F('precio'), output_field=FloatField())
+        ingreso=Sum(F('cantidad') * F('precio'), output_field=FloatField()) #F(): Funciona para hacer referencia a los valores de los campos de base de datos en las consultas, permitiendo hacer cálculos directamente en la base de datos.
     ).order_by('producto__categoria')
 
     # Preparar datos para el gráfico de pastel

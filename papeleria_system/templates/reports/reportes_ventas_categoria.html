@@ -63,7 +63,8 @@
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // Las listas de categorias y cantidades ahora se pasan como JSON serializado
+    
+    // 'escapejs' se utiliza para escapar los caracteres especiales en JSON que podrían causar errores.
     const categorias = JSON.parse('{{ categorias|escapejs }}');
     const cantidades = JSON.parse('{{ cantidades|escapejs }}');
     
@@ -81,7 +82,7 @@
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,  // Para personalizar el tamaño
+            maintainAspectRatio: false,
         }
     });
 </script>

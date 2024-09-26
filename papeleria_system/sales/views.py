@@ -8,13 +8,16 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.paginator import Paginator
 
+# Vista para registrar una nueva venta
 def registrar_venta(request):
+    # Obtener todos los clientes y productos disponibles
     clientes = Cliente.objects.all()
     productos = Producto.objects.all()
     mensaje_error = None
     cliente = None
     detalles = []
 
+    # Manejar la búsqueda de un cliente por su número de DUI
     if request.method == 'POST' and 'buscar_cliente' in request.POST:
         dui = request.POST.get('dui')
         try:
@@ -29,6 +32,7 @@ def registrar_venta(request):
         except Cliente.DoesNotExist:
             return JsonResponse({'error': 'Cliente no encontrado'}, status=404)
 
+    # Manejar la acción de registrar una venta
     if request.method == 'POST' and 'registrar_venta' in request.POST:
         cliente_id = request.POST.get('cliente_id')
         if not cliente_id:
@@ -39,12 +43,14 @@ def registrar_venta(request):
             except Cliente.DoesNotExist:
                 mensaje_error = "Debe ingresar un cliente válido."
 
+        # Obtener productos y cantidades seleccionados
         productos_seleccionados = request.POST.getlist('producto_id[]')
         cantidades = request.POST.getlist('cantidad[]')
         if not productos_seleccionados or not cantidades or not cliente:
             mensaje_error = "Debe seleccionar al menos un producto y una cantidad válida."
         
         if not mensaje_error:
+            # Registrar la venta de forma atómica
             with transaction.atomic():
                 venta = Venta.objects.create(cliente=cliente, usuario=request.user, total=0)
                 total_venta = 0
@@ -56,15 +62,21 @@ def registrar_venta(request):
                         break
                     else:
                         total = cantidad * producto.precio
-                        DetalleVenta.objects.create(venta=venta, producto=producto, cantidad=cantidad, precio=producto.precio)
+                        DetalleVenta.objects.create(
+                            venta=venta, 
+                            producto=producto, 
+                            cantidad=cantidad, 
+                            precio=producto.precio
+                        )
                         producto.stock -= cantidad
                         producto.save()
                         total_venta += total
                 else:
+                    # Guardar el total de la venta
                     venta.total = total_venta
                     venta.save()
 
-                    # Devolver el venta_id en la respuesta JSON
+                    # Retornar el ID de la venta como respuesta JSON
                     return JsonResponse({'success': True, 'venta_id': venta.id})
 
     context = {
@@ -76,19 +88,20 @@ def registrar_venta(request):
     }
     return render(request, 'sales/registrar_venta.html', context)
 
-
+# Vista para mostrar la factura de una venta
 def ver_factura(request, venta_id):
+    # Obtener la venta por su ID o retornar un 404 si no existe
     venta = get_object_or_404(Venta, id=venta_id)
     detalles = DetalleVenta.objects.filter(venta=venta)
 
-    # Crear una lista de detalles con el cálculo del total por producto
+    # Crear una lista de detalles de productos para mostrar en la factura
     detalles_list = []
     for detalle in detalles:
         detalles_list.append({
             'producto__nombre': detalle.producto.nombre,
             'cantidad': detalle.cantidad,
             'precio': detalle.precio,
-            'total': detalle.cantidad * detalle.precio  # Calcula el total
+            'total': detalle.cantidad * detalle.precio  # Calcular el total del producto
         })
 
     detalles_json = json.dumps(detalles_list, cls=DjangoJSONEncoder)
@@ -96,17 +109,18 @@ def ver_factura(request, venta_id):
     context = {
         'venta': venta,
         'detalles': detalles,
-        'detalles_json': detalles_json,  # Añadir detalles como JSON
+        'detalles_json': detalles_json,
     }
 
     return render(request, 'sales/factura.html', context)
 
+# Vista para listar todas las ventas
 def listar_ventas(request):
     # Obtener todas las ventas y detalles de ventas
     ventas = Venta.objects.all()
     detalles_ventas = DetalleVenta.objects.all()
 
-    # Filtros
+    # Aplicar filtros según la solicitud
     factura_id = request.GET.get('factura_id')
     cliente_dui = request.GET.get('cliente_dui')
     fecha_desde = request.GET.get('fecha_desde')
@@ -123,13 +137,13 @@ def listar_ventas(request):
         detalles_ventas = detalles_ventas.filter(producto__nombre__icontains=producto)
 
     # Paginación - Mostrar 8 detalles de ventas por página
-    paginator = Paginator(detalles_ventas, 8)  # Paginar los detalles de venta (productos), no las ventas
+    paginator = Paginator(detalles_ventas, 8)
     page_number = request.GET.get('page')
     detalles_page_obj = paginator.get_page(page_number)
 
     context = {
-        'ventas': ventas,  # Las ventas filtradas
-        'detalles_ventas': detalles_page_obj,  # Paginamos los detalles
+        'ventas': ventas,
+        'detalles_ventas': detalles_page_obj,
         'factura_id': factura_id,
         'cliente_dui': cliente_dui,
         'fecha_desde': fecha_desde,

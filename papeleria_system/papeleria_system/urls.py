@@ -21,14 +21,21 @@ from .views import home_view
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    # Ruta para el panel de administración de Django
     path('admin/', admin.site.urls),
+    
     path('login/', login_view, name='login'),
     path('', login_view),
+
+    # Incluyendo las URLs de cada aplicación
+
     path('home/', home_view, name='home'),
     path('products/', include('products.urls')),
     path('accounts/', include('accounts.urls')),
     path('inventory/', include('inventory.urls')),
     path('sales/', include('sales.urls')),
     path('reports/', include('reports.urls')),
+
+    # Ruta para cerrar sesión, usando la vista estándar de Django
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]

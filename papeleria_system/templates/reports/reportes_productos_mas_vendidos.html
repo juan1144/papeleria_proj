@@ -64,13 +64,17 @@
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // Convertir las listas de productos y cantidades a JSON de forma segura
+    
+    // 'escapejs' se utiliza para escapar los caracteres especiales en JSON que podrían causar errores.
     const productos = JSON.parse('{{ productos|escapejs }}');
     const cantidades = JSON.parse('{{ cantidades|escapejs }}');
 
+    // Selecciona el elemento del gráfico con el ID 'productChart' y lo prepara para dibujar un gráfico.
     const ctx = document.getElementById('productChart').getContext('2d');
+
+    // Inicializa un nuevo gráfico de barras usando Chart.js
     const chart = new Chart(ctx, {
-        type: 'bar',  // Gráfico de barras
+        type: 'bar',
         data: {
             labels: productos,
             datasets: [{
@@ -82,8 +86,8 @@
             }]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,  // Ajuste de tamaño
+            responsive: true,  // Asegura que el gráfico se adapte a diferentes tamaños de pantalla
+            maintainAspectRatio: false,  // Permite personalizar el tamaño del gráfico sin mantener la relación de aspecto original
         }
     });
 </script>

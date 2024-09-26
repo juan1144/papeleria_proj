@@ -3,6 +3,7 @@ from django.conf import settings
 from products.models import Producto
 
 class Inventario(models.Model):
+    # Definición de las opciones para el tipo de cambio (entrada o salida).
     TIPO_CAMBIO_CHOICES = (
         ('entrada', 'Entrada'),
         ('salida', 'Salida'),
