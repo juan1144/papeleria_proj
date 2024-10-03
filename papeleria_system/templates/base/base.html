@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -69,9 +69,18 @@
           </div>
         </div>
 
-        <a data-menu="clients" href="#">
-          <i class="icon ion-ios-people"></i>
-        </a>
+        <!-- Submenú para Clientes -->
+        <div class="submenu">
+          <a href="#"
+            class="menu-item {% if request.resolver_match.url_name == 'agregar_cliente' or request.resolver_match.url_name == 'ver_clientes' %}active{% endif %}">
+            <i class="icon ion-ios-people"></i>
+          </a>
+          <div class="submenu-items">
+            <a href="{% url 'ver_clientes' %}">Ver clientes</a>
+            <a href="{% url 'agregar_cliente' %}">Agregar cliente</a>
+          </div>
+        </div>
+
         <a data-dialog="logout" href="#"><i class="icon ion-log-out"></i></a>
       </div>
       <span class="username">{{ full_name }}</span>

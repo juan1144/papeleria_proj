@@ -35,6 +35,7 @@ urlpatterns = [
     path('inventory/', include('inventory.urls')),
     path('sales/', include('sales.urls')),
     path('reports/', include('reports.urls')),
+    path('clientes/', include('customers.urls')),
 
     # Ruta para cerrar sesión, usando la vista estándar de Django
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),

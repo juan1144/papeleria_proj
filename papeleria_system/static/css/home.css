@@ -331,3 +331,11 @@ html, body {
 .submenu-items a i {
   margin-right: 8px;
 }
+
+.submenu-items.show {
+  display: block !important;
+}
+
+.submenu-items {
+  display: none;
+}
