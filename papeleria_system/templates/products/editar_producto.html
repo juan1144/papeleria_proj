@@ -1,0 +1,71 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Editar Producto{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/agregar_producto.css' %}">
+
+<div class="product-form-container">
+    <h1>Editar Producto</h1>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="codigo">Código:</label>
+            <input type="text" id="codigo" name="codigo" value="{{ producto.codigo }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" value="{{ producto.nombre }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion">{{ producto.descripcion }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="categoria">Categoría:</label>
+            <select id="categoria" name="categoria" required>
+                <option value="Útiles Escolares" {% if producto.categoria == "Útiles Escolares" %}selected{% endif %}>Útiles Escolares</option>
+                <option value="Tecnología" {% if producto.categoria == "Tecnología" %}selected{% endif %}>Tecnología</option>
+                <option value="Oficina" {% if producto.categoria == "Oficina" %}selected{% endif %}>Oficina</option>
+                <option value="Arte y Manualidades" {% if producto.categoria == "Arte y Manualidades" %}selected{% endif %}>Arte y Manualidades</option>
+                <option value="Papelería General" {% if producto.categoria == "Papelería General" %}selected{% endif %}>Papelería General</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="precio_compra">Precio de Compra:</label>
+            <input type="number" id="precio_compra" name="precio_compra" value="{{ producto.precio_compra }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="precio">Precio de Venta:</label>
+            <input type="number" id="precio" name="precio" value="{{ producto.precio }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" name="stock" value="{{ producto.stock }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="umbral_stock">Umbral de Stock:</label>
+            <input type="number" id="umbral_stock" name="umbral_stock" value="{{ producto.umbral_stock }}" required>
+        </div>
+
+        <button type="submit" class="submit-btn">Actualizar Producto</button>
+    </form>
+</div>
+{% endblock %}

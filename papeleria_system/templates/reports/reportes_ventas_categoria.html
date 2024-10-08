@@ -30,7 +30,7 @@
                 <tr>
                     <th>Categoría</th>
                     <th>Cantidad Vendida</th>
-                    <th>Ingreso Total</th>
+                    <th>Ganancias Totales</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,7 +38,7 @@
                 <tr>
                     <td>{{ venta.producto__categoria }}</td>
                     <td>{{ venta.cantidad_vendida }}</td>
-                    <td>${{ venta.ingreso|floatformat:2 }}</td>
+                    <td>${{ venta.ganancias|floatformat:2 }}</td>
                 </tr>
                 {% empty %}
                 <tr>
