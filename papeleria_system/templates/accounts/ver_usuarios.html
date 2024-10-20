@@ -1,0 +1,101 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Lista de Usuarios{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/usuarios_lista.css' %}">
+
+<div class="users-container">
+    <h1>Lista de Usuarios</h1>
+
+    <!-- Filtros de búsqueda -->
+    <form method="get" class="filter-form">
+        <div class="filter-group">
+            <label for="identificacion_personal">Identificación:</label>
+            <input type="text" id="identificacion_personal" name="identificacion_personal" placeholder="Buscar por Identificación" value="{{ identificacion_personal|default_if_none:'' }}">
+        </div>
+        <div class="filter-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Buscar por Nombre" value="{{ nombre|default_if_none:'' }}">
+        </div>
+        <div class="filter-group">
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" placeholder="Buscar por Apellido" value="{{ apellido|default_if_none:'' }}">
+        </div>
+        <div class="filter-group">
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono" placeholder="Buscar por Teléfono" value="{{ telefono|default_if_none:'' }}">
+        </div>
+        <div class="filter-group">
+            <label for="rol">Rol:</label>
+            <select id="rol" name="rol">
+                <option value="">Todos</option>
+                <option value="admin" {% if rol == "admin" %}selected{% endif %}>Admin</option>
+                <option value="empleado" {% if rol == "empleado" %}selected{% endif %}>Empleado</option>
+            </select>
+        </div>
+        <div class="filter-buttons">
+            <button type="submit">Buscar</button>
+            <a href="{% url 'ver_usuarios' %}" class="clear-button">Limpiar Filtros</a>
+        </div>
+    </form>
+
+    <!-- Listado de usuarios -->
+    <table class="users-table">
+        <thead>
+            <tr>
+                <th>Identificación</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Teléfono</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.identificacion_personal }}</td>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.apellido }}</td>
+                <td>{{ usuario.telefono }}</td>
+                <td>{{ usuario.get_rol_display }}</td>
+                <td>
+                    <a href="{% url 'editar_usuario' usuario.id %}">Editar</a> |
+                    <form method="POST" action="{% url 'eliminar_usuario' usuario.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('¿Está seguro de eliminar este usuario?');" style="background:none;border:none;color:#007bff;text-decoration:underline;cursor:pointer;">
+                            Eliminar
+                        </button>
+                    </form>
+                </td>                
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No se encontraron usuarios.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Paginación -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if usuarios.has_previous %}
+                <a href="?page=1">Primero</a>
+                <a href="?page={{ usuarios.previous_page_number }}">Anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ usuarios.number }} de {{ usuarios.paginator.num_pages }}.
+            </span>
+
+            {% if usuarios.has_next %}
+                <a href="?page={{ usuarios.next_page_number }}">Siguiente</a>
+                <a href="?page={{ usuarios.paginator.num_pages }}">Último</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}

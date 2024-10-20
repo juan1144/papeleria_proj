@@ -8,18 +8,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Default Title{% endblock %}</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 
 <body>
   <div class="container">
     <div class="drawer">
-      <a class="navicon" href="#"><i class="icon ion-navicon"></i></a>
+      <div class="logo-container">
+        <a class="logo-link" href="{% url 'home' %}">
+          <img class="logo-image" src="{% static 'img/logo.png' %}" alt="Logo de la Empresa">
+        </a>
+      </div>
       <div class="menu">
         <a data-menu="home" href="{% url 'home' %}"
           class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
           <i class="icon ion-home"></i>
         </a>
+
+        <div class="submenu">
+          <a href="#"
+            class="menu-item {% if request.resolver_match.url_name == 'ver_usuarios' or request.resolver_match.url_name == 'agregar_usuario' %}active{% endif %}">
+            <i class="icon ion-ios-person"></i>
+          </a>
+          <div class="submenu-items">
+            {% if user.is_authenticated and user.rol == 'admin' %}
+            <a href="{% url 'ver_usuarios' %}">Ver usuarios</a>
+            <a href="{% url 'agregar_usuario' %}">Agregar usuario</a>
+            {% endif %}
+            <a href="{% url 'cambiar_password' %}">Cambiar Contraseña</a>
+          </div>
+        </div>
 
         <div class="submenu">
           <a href="#"

@@ -4,11 +4,58 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <div class="page active" data-page="dashboard">
-        <div class="header">
-            <div class="title">
-                <h2>¡Bienvenido/a {{ full_name }}!</h2>
-            </div>
+    <div class="header">
+        <div class="title">
+            <h2>¡Bienvenido/a {{ full_name }}!</h2>
+        </div>
+    </div>
+
+    <!-- Menú rápido de tarjetas -->
+    <div class="quick-menu">
+        <div class="card-container">
+            <!-- Tarjeta 1: Registrar Venta -->
+            <a href="{% url 'registrar_venta' %}" class="card">
+                <div class="card-icon">
+                    <i class="fas fa-cash-register"></i>
+                </div>
+                <div class="card-info">
+                    <h3>Registrar Venta</h3>
+                    <p>Procesa una nueva venta rápidamente.</p>
+                </div>
+            </a>
+
+            <!-- Tarjeta 2: Alerta de Stock -->
+            <a href="{% url 'alerta_stock' %}" class="card">
+                <div class="card-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="card-info">
+                    <h3>Alerta de Stock</h3>
+                    <p>Consulta productos con bajo inventario.</p>
+                </div>
+            </a>
+
+            <!-- Tarjeta 3: Agregar Cliente -->
+            <a href="{% url 'agregar_cliente' %}" class="card">
+                <div class="card-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="card-info">
+                    <h3>Agregar Cliente</h3>
+                    <p>Registrar nuevos clientes en el sistema.</p>
+                </div>
+            </a>
+
+            <!-- Tarjeta 4: Agregar Producto -->
+            <a href="{% url 'agregar_productos' %}" class="card">
+                <div class="card-icon">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="card-info">
+                    <h3>Agregar Producto</h3>
+                    <p>Añadir nuevos productos al inventario.</p>
+                </div>
+            </a>
         </div>
     </div>
 {% endblock %}

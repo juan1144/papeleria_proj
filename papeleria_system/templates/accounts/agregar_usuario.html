@@ -1,0 +1,85 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Agregar Usuario{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/agregar_usuario.css' %}">
+
+<div class="user-form-container">
+    <h1>Agregar Usuario</h1>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Identificación Personal -->
+        <div class="form-group">
+            <label for="identificacion_personal">Identificación Personal:</label>
+            <input type="text" id="identificacion_personal" name="identificacion_personal" maxlength="9" required
+                pattern="\d{9}" title="Debe tener exactamente 9 dígitos numéricos">
+        </div>
+
+        <!-- Nombre -->
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+        </div>
+
+        <!-- Apellido -->
+        <div class="form-group">
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required>
+        </div>
+
+        <!-- Teléfono -->
+        <div class="form-group">
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono" maxlength="8" required pattern="\d{8}"
+                title="Debe tener 8 dígitos numéricos">
+        </div>
+
+        <!-- Rol -->
+        <div class="form-group">
+            <label for="rol">Rol:</label>
+            <select id="rol" name="rol" required>
+                <option value="empleado">Empleado</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+
+        <!-- Nombre de Usuario -->
+        <div class="form-group">
+            <label for="username">Nombre de Usuario:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="form-group">
+            <label for="password1">Contraseña:</label>
+            <input type="password" id="password1" name="password1" required>
+        </div>
+
+        <!-- Confirmar Contraseña -->
+        <div class="form-group">
+            <label for="password2">Confirmar Contraseña:</label>
+            <input type="password" id="password2" name="password2" required>
+        </div>
+
+        <!-- Botón para enviar -->
+        <div class="form-group">
+            <button type="submit" class="submit-btn">Agregar Usuario</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

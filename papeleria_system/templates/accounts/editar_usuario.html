@@ -1,0 +1,110 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Editar Usuario{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/agregar_usuario.css' %}">
+
+<div class="user-form-container">
+    <h1>Editar Usuario</h1>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Identificación Personal -->
+        <div class="form-group">
+            <label for="identificacion_personal">Identificación Personal:</label>
+            <input type="text" id="identificacion_personal" name="identificacion_personal" maxlength="9" required value="{{ form.identificacion_personal.value }}"
+                pattern="\d{9}" title="Debe tener exactamente 9 dígitos numéricos">
+        </div>
+
+        <!-- Nombre -->
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required value="{{ form.nombre.value }}">
+        </div>
+
+        <!-- Apellido -->
+        <div class="form-group">
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required value="{{ form.apellido.value }}">
+        </div>
+
+        <!-- Teléfono -->
+        <div class="form-group">
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono" maxlength="8" required value="{{ form.telefono.value }}" 
+                pattern="\d{8}" title="Debe tener 8 dígitos numéricos">
+        </div>
+
+        <!-- Rol -->
+        <div class="form-group">
+            <label for="rol">Rol:</label>
+            <select id="rol" name="rol" required>
+                <option value="empleado" {% if form.rol.value == "empleado" %}selected{% endif %}>Empleado</option>
+                <option value="admin" {% if form.rol.value == "admin" %}selected{% endif %}>Admin</option>
+            </select>
+        </div>
+
+        <!-- Nombre de Usuario -->
+        <div class="form-group">
+            <label for="username">Nombre de Usuario:</label>
+            <input type="text" id="username" name="username" required value="{{ form.username.value }}">
+        </div>
+
+        <!-- Contraseña -->
+        <div class="form-group password-group">
+            <label for="password">Nueva Contraseña:</label>
+            <div class="password-actions">
+                <input type="password" id="password" name="password" placeholder="Deja en blanco para no cambiar">
+                <i id="togglePassword" class="fas fa-eye password-icon"></i>
+                <i id="generatePassword" class="fas fa-random password-icon"></i>
+            </div>
+        </div>
+
+        <!-- Botón para enviar -->
+        <div class="form-group">
+            <button type="submit" class="submit-btn">Actualizar Usuario</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Mostrar u ocultar contraseña
+    const passwordField = document.getElementById('password');
+    const togglePasswordButton = document.getElementById('togglePassword');
+    const generatePasswordButton = document.getElementById('generatePassword');
+
+    togglePasswordButton.addEventListener('click', function() {
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+
+    // Generar una contraseña aleatoria
+    generatePasswordButton.addEventListener('click', function() {
+        const password = generateRandomPassword();
+        passwordField.value = password;
+    });
+
+    function generateRandomPassword() {
+        const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
+        let password = "";
+        for (let i = 0; i < 12; i++) {
+            password += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return password;
+    }
+</script>
+{% endblock %}
