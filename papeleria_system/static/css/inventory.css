@@ -1,9 +1,9 @@
 .inventory-container {
     margin-left: 0px;
     padding: 20px;
-    background-color: var(--background-primary);
-    color: var(--text-primary);
-    border-radius: 8px;
+    background-color: #E6E6FA;  /* Lavanda claro */
+    color: #4B0082;  /* Texto en índigo oscuro */
+    border-radius: 12px;  /* Bordes redondeados */
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -13,7 +13,8 @@
 .inventory-container h1 {
     font-size: 24px;
     margin-bottom: 20px;
-    color: var(--text-primary);
+    color: #6A5ACD;  /* Título en un lavanda más oscuro */
+    text-align: center;
 }
 
 .filter-form {
@@ -31,15 +32,15 @@
 .filter-group label {
     display: block;
     margin-bottom: 5px;
-    color: var(--text-secondary);
+    color: #6A5ACD;  /* Etiquetas en lavanda oscuro */
 }
 
 .filter-group select, .filter-group input {
     width: 100%;
     padding: 8px;
-    border: 1px solid var(--background-secondary);
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
+    border: 1px solid #D8BFD8;  /* Bordes lavanda claro */
+    background-color: #F3E6FB;  /* Fondo lavanda claro */
+    color: #4B0082;  /* Texto en índigo oscuro */
     border-radius: 4px;
 }
 
@@ -51,8 +52,8 @@
 
 .filter-button, .clear-button {
     padding: 8px 15px;
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: #6A5ACD;  /* Fondo lavanda oscuro para los botones */
+    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -62,7 +63,7 @@
 }
 
 .filter-button:hover, .clear-button:hover {
-    background-color: darken(var(--accent-primary), 10%);
+    background-color: #4B0082;  /* Hover en color índigo oscuro */
 }
 
 .inventory-table {
@@ -75,19 +76,20 @@
 .inventory-table th, .inventory-table td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid var(--background-secondary);
+    border-bottom: 1px solid #D8BFD8;  /* Bordes lavanda claro */
 }
 
 .inventory-table th {
-    background-color: var(--background-secondary);
+    background-color: #D8BFD8;  /* Fondo lavanda claro para encabezados */
+    color: #4B0082;  /* Texto en índigo oscuro */
 }
 
 .inventory-table tr:nth-child(even) {
-    background-color: var(--background-secondary);
+    background-color: #F3E6FB;  /* Fondo lavanda muy suave para las filas pares */
 }
 
 .inventory-table tr:hover {
-    background-color: var(--background-secondary);
+    background-color: #D8BFD8;  /* Fondo lavanda claro en hover */
 }
 
 .pagination {
@@ -103,7 +105,7 @@
 }
 
 .step-links a, .step-links span {
-    color: var(--text-primary);
+    color: #4B0082;  /* Texto en índigo oscuro */
     text-decoration: none;
     padding: 5px 10px;
     border-radius: 4px;
@@ -111,5 +113,5 @@
 }
 
 .step-links a:hover {
-    background-color: var(--accent-primary);
+    background-color: #6A5ACD;  /* Fondo lavanda oscuro en hover */
 }

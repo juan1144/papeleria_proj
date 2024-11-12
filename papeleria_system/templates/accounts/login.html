@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,19 @@
         @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
 
         :root {
-            --drawer: #16191C;
-            --text-primary: #FFFFFF;
-            --text-secondary: #86909A;
-            --text-faded: #C3C5C7;
-            --background-primary: #22272B;
-            --background-secondary: #374148;
-            --accent-primary: rgba(54,80,209,1);
+            --drawer: #C5A3E2;
+            /* Color lavanda claro */
+            --text-primary: black;
+            --text-secondary: black;
+            /* Lavanda claro */
+            --text-faded: #B399D4;
+            /* Lavanda suave */
+            --background-primary: #D8BFD8;
+            /* Fondo principal lavanda */
+            --background-secondary: #8B80C2;
+            /* Fondo secundario lavanda */
+            --accent-primary: #764BA2;
+            /* Lavanda más oscuro para bordes de enfoque */
         }
 
         body {
@@ -24,16 +31,18 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: var(--background-primary);
+            background-color: #C9A9E3;
+            /* Fondo lavanda claro */
             font-family: 'Open Sans', sans-serif;
             color: var(--text-primary);
         }
 
         .container {
             background-color: var(--background-secondary);
+            /* Fondo secundario lavanda */
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
             width: 400px;
             text-align: center;
         }
@@ -49,19 +58,23 @@
             flex-direction: column;
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="text"],
+        input[type="password"] {
             padding: 15px;
             margin: 10px 0;
             border: none;
             border-radius: 5px;
             font-size: 16px;
             background-color: var(--background-primary);
-            color: var(--text-primary);
+            /* Fondo claro lavanda */
+            color: var(--text-secondary);
+            /* Texto lavanda claro */
         }
 
         button {
             padding: 15px;
-            background-color: var(--accent-primary);
+            background-color: #A785D4;
+            /* Botón lavanda */
             border: none;
             border-radius: 5px;
             color: var(--text-primary);
@@ -71,19 +84,24 @@
         }
 
         button:hover {
-            background-color: #3650d1;
+            background-color: #764BA2;
+            /* Más oscuro al pasar el mouse */
         }
 
-        input[type="text"]:focus, input[type="password"]:focus {
+        input[type="text"]:focus,
+        input[type="password"]:focus {
             outline: none;
             border: 2px solid var(--accent-primary);
+            /* Borde lavanda oscuro */
         }
 
         .container p {
-            color: var(--text-secondary);
+            color: hsl(from color h s l);
+            /* Texto en tono lavanda suave */
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Iniciar Sesión</h2>
@@ -94,4 +112,5 @@
         </form>
     </div>
 </body>
+
 </html>

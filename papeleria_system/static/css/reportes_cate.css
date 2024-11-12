@@ -1,9 +1,22 @@
 /* reportes_cate.css */
 
+/* Definición de las variables de color */
+:root {
+    --background-primary: #f3e6ff; /* Lavanda suave */
+    --background-secondary: #d1b3ff; /* Lavanda intermedio */
+    --background-tertiary: #e6ccff; /* Lavanda más claro */
+    --background-hover: #b38aff; /* Hover, lavanda oscuro */
+    --text-primary: black; /* Texto principal oscuro */
+    --text-secondary: #6a4e77; /* Texto secundario en tono morado */
+    --accent-primary: #9c66cc; /* Morado para acentos */
+    --text-button: #ffffff; /* Color blanco para botones */
+}
+
+/* Estilo general para la vista de reportes */
 .reports-container {
     padding: 20px;
-    background-color: var(--background-primary);
-    color: var(--text-primary);
+    background-color: var(--background-primary); /* Fondo principal */
+    color: var(--text-primary); /* Color de texto principal */
     border-radius: 8px;
     max-height: 80vh;  /* Limitar la altura de la página completa */
     overflow-y: auto;  /* Activar el scrollbar si se excede la altura */
@@ -29,26 +42,30 @@
 .filter-group label {
     display: block;
     margin-bottom: 5px;
-    color: var(--text-secondary);
+    color: var(--text-secondary); /* Color para los textos de las etiquetas */
 }
 
 .filter-group input {
     width: 100%;
     padding: 8px;
-    border: 1px solid var(--background-secondary);
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
+    border: 1px solid var(--background-secondary); /* Borde de los inputs */
+    background-color: var(--background-secondary); /* Fondo de los inputs */
+    color: var(--text-primary); /* Color de texto de los inputs */
     border-radius: 4px;
 }
 
 .filter-button {
     padding: 10px 20px;
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: var(--accent-primary); /* Fondo del botón */
+    color: var(--text-button); /* Color de texto del botón */
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+.filter-button:hover {
+    background-color: var(--background-hover); /* Fondo al pasar el cursor */
 }
 
 .sales-report table {
@@ -60,11 +77,15 @@
 .sales-report th, .sales-report td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid var(--background-secondary);
+    border-bottom: 1px solid var(--background-secondary); /* Borde inferior de celdas */
 }
 
 .sales-report tr:nth-child(even) {
-    background-color: var(--background-secondary);
+    background-color: var(--background-secondary); /* Fondo de filas pares */
+}
+
+.sales-report tr:hover {
+    background-color: var(--background-hover); /* Fondo de fila al pasar el cursor */
 }
 
 .chart-section {

@@ -1,7 +1,7 @@
 .inventory-container {
     padding: 20px;
-    background-color: var(--background-primary);
-    color: var(--text-primary);
+    background-color: #F3F3FF; 
+    color: #4B4B4B; 
     border-radius: 8px;
     max-width: 600px;
     margin: 0 auto;
@@ -11,7 +11,7 @@
 .inventory-container h1 {
     font-size: 28px;
     margin-bottom: 20px;
-    color: var(--text-primary);
+    color: #4B4B4B; 
     text-align: center;
     font-weight: 600;
 }
@@ -23,16 +23,16 @@
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    color: var(--text-secondary);
+    color: #4B4B4B; 
     font-weight: 500;
 }
 
 .form-group input, .form-group select {
     width: 100%;
     padding: 10px;
-    border: 1px solid var(--background-secondary);
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
+    border: 1px solid #D1C4E9; 
+    background-color: #fff; 
+    color: #4B4B4B; 
     border-radius: 4px;
     font-size: 16px;
     box-sizing: border-box;
@@ -40,15 +40,15 @@
 }
 
 .form-group input:focus, .form-group select:focus {
-    border-color: var(--accent-primary);
+    border-color: #9575CD; 
     outline: none;
 }
 
 .submit-button {
     width: 100%;
     padding: 12px 0;
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: #9575CD; 
+    color: #fff; 
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -59,15 +59,15 @@
 }
 
 .submit-button:hover {
-    background-color: darken(var(--accent-primary), 10%);
+    background-color: #7E57C2;
 }
 
-/* Estilos para select2 */
+
 .select2-container--default .select2-selection--single {
-    background-color: var(--background-secondary);
-    border: 1px solid var(--background-secondary);
+    background-color: #fff;
+    border: 1px solid #D1C4E9; 
     border-radius: 4px;
-    color: var(--text-primary);
+    color: #4B4B4B; 
     height: 46px;
     padding: 10px;
 }
@@ -77,18 +77,16 @@
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: var(--text-primary);
+    color: #4B4B4B; 
     font-size: 16px;
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: #9575CD; 
+    color: #fff; 
 }
 
-/* Oculta el contenedor extra si está visible */
+
 .select2-container--default {
     display: none !important;
 }
-
-

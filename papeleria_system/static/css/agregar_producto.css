@@ -1,13 +1,12 @@
-/* El contenedor principal que abarca todo el contenido, excepto el sidebar */
 .content {
     padding: 20px;
-    max-height: 100vh; /* Limita la altura al 100% de la ventana */
-    overflow-y: auto; /* Activa el scrollbar para el contenido */
+    max-height: 100vh; 
+    overflow-y: auto; 
 }
 
-/* Contenedor específico del formulario */
+
 .product-form-container {
-    background-color: var(--background-primary);
+    background-color: #F3F3FF; 
     padding: 20px;
     border-radius: 8px;
     max-width: 800px;
@@ -18,7 +17,7 @@
 .product-form-container h1 {
     text-align: center;
     font-size: 22px;
-    color: var(--text-primary);
+    color: #4B4B4B; 
     margin-bottom: 25px;
 }
 
@@ -30,7 +29,7 @@
 
 .form-group label {
     font-weight: bold;
-    color: var(--text-secondary);
+    color: #9575CD; 
     margin-bottom: 5px;
 }
 
@@ -41,10 +40,10 @@
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid var(--background-secondary);
+    border: 1px solid #D1C4E9; 
     border-radius: 4px;
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
+    background-color: #fff; 
+    color: #4B4B4B; 
 }
 
 .form-group input[type="date"],
@@ -54,8 +53,8 @@
 }
 
 .form-group button.submit-btn {
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: #9575CD; 
+    color: #fff; 
     font-weight: bold;
     border: none;
     cursor: pointer;
@@ -63,7 +62,7 @@
 }
 
 .form-group button.submit-btn:hover {
-    background-color: var(--accent-secondary);
+    background-color: #7E57C2;
 }
 
 .product-form-container .form-group {
@@ -75,19 +74,19 @@
     resize: none;
 }
 
-/* Estilo para el scrollbar */
+
 .content::-webkit-scrollbar {
     width: 10px;
 }
 
 .content::-webkit-scrollbar-track {
-    background: var(--background-secondary);
+    background: #D1C4E9; 
 }
 
 .content::-webkit-scrollbar-thumb {
-    background-color: var(--accent-primary);
+    background-color: #9575CD; 
     border-radius: 10px;
-    border: 3px solid var(--background-secondary);
+    border: 3px solid #D1C4E9; 
 }
 
 .messages {

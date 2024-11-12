@@ -1,10 +1,24 @@
 /* Estilos generales */
+
+/* Definición de las variables de color */
+:root {
+    --background-primary: #f3e6ff; /* Lavanda suave */
+    --background-secondary: #d1b3ff; /* Lavanda intermedio */
+    --background-tertiary: #e6ccff; /* Lavanda más claro */
+    --background-hover: #b38aff; /* Hover, lavanda oscuro */
+    --text-primary: black; /* Texto principal oscuro */
+    --text-secondary: #6a4e77; /* Texto secundario en tono morado */
+    --accent-primary: #9c66cc; /* Morado para acentos */
+    --text-button: #ffffff; /* Color blanco para botones */
+}
+
+/* Estilo para el contenedor principal de ventas */
 .sales-container {
     padding: 20px;
-    background-color: var(--background-primary);
-    color: var(--text-primary);
+    background-color: var(--background-primary); /* Fondo principal lavanda suave */
+    color: var(--text-primary); /* Texto oscuro */
     border-radius: 8px;
-    height: calc(100vh - 40px);
+    height: calc(100vh - 40px); /* Ajustar el alto al 100% del viewport */
     overflow-y: auto;
     box-sizing: border-box;
 }
@@ -12,12 +26,13 @@
 .sales-container h1 {
     font-size: 24px;
     margin-bottom: 20px;
-    color: var(--text-primary);
+    color: var(--text-primary); /* Color del título principal */
 }
 
+/* Estilo para las secciones dentro del contenedor de ventas */
 .section {
     margin-bottom: 30px;
-    border: 1px solid var(--background-secondary);
+    border: 1px solid var(--background-secondary); /* Borde de las secciones en lavanda intermedio */
     padding: 15px;
     border-radius: 8px;
 }
@@ -25,9 +40,10 @@
 .section h2 {
     font-size: 20px;
     margin-bottom: 15px;
-    color: var(--text-secondary);
+    color: var(--text-secondary); /* Título de las secciones en morado suave */
 }
 
+/* Estilos de los grupos de formulario */
 .form-group {
     margin-bottom: 15px;
 }
@@ -35,23 +51,24 @@
 .form-group label {
     display: block;
     margin-bottom: 5px;
-    color: var(--text-secondary);
+    color: var(--text-secondary); /* Color del texto de las etiquetas */
 }
 
 .form-group input, .form-group select {
     width: 100%;
     padding: 8px;
-    border: 1px solid var(--background-secondary);
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
+    border: 1px solid var(--background-secondary); /* Borde de los inputs en lavanda intermedio */
+    background-color: var(--background-secondary); /* Fondo de los inputs */
+    color: var(--text-primary); /* Texto oscuro dentro de los inputs */
     border-radius: 4px;
 }
 
+/* Estilos de los botones de acción */
 #buscar-cliente-button, .add-product-button, .eliminar-producto-button {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: var(--accent-primary); /* Fondo morado para los botones */
+    color: var(--text-button); /* Texto blanco en los botones */
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -59,10 +76,10 @@
 }
 
 #buscar-cliente-button:hover, .add-product-button:hover, .eliminar-producto-button:hover {
-    background-color: darken(var(--accent-primary), 10%);
+    background-color: darken(var(--accent-primary), 10%); /* Fondo más oscuro al pasar el cursor */
 }
 
-/* Estilos para la tabla de detalle de venta */
+/* Estilo de la tabla de detalle de venta */
 .detalle-venta {
     width: 100%;
     border-collapse: collapse;
@@ -70,22 +87,24 @@
 }
 
 .detalle-venta th, .detalle-venta td {
-    border: 1px solid var(--background-secondary);
+    border: 1px solid var(--background-secondary); /* Borde en lavanda intermedio */
     padding: 8px;
     text-align: center;
-    color: var(--text-primary);
+    color: var(--text-primary); /* Texto de la tabla en color oscuro */
 }
 
+/* Estilo para el grupo de total en la tabla */
 .total-group {
     text-align: right;
     font-size: 20px;
-    color: var(--accent-primary);
+    color: var(--accent-primary); /* Total en color morado */
 }
 
+/* Estilo del botón de envío */
 .submit-button {
     padding: 10px 20px;
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: var(--accent-primary); /* Fondo morado */
+    color: var(--text-button); /* Texto blanco */
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -93,10 +112,10 @@
 }
 
 .submit-button:hover {
-    background-color: darken(var(--accent-primary), 10%);
+    background-color: darken(var(--accent-primary), 10%); /* Cambio de fondo al pasar el cursor */
 }
 
-/* Ajustes específicos */
+/* Estilo del campo de cantidad en el formulario */
 .cantidad-input {
     width: 60px;
     text-align: center;

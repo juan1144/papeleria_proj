@@ -7,7 +7,7 @@
 
 /* Contenedor específico del formulario de usuario */
 .user-form-container {
-    background-color: var(--background-primary);
+    background-color: #F3F3FF; /* Fondo lavanda claro */
     padding: 20px;
     border-radius: 8px;
     max-width: 800px;
@@ -18,7 +18,7 @@
 .user-form-container h1 {
     text-align: center;
     font-size: 22px;
-    color: var(--text-primary);
+    color: #6A4E8C; /* Texto lavanda oscuro */
     margin-bottom: 25px;
 }
 
@@ -30,7 +30,7 @@
 
 .form-group label {
     font-weight: bold;
-    color: var(--text-secondary);
+    color: #9575CD; /* Texto lavanda */
     margin-bottom: 5px;
 }
 
@@ -40,15 +40,15 @@
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid var(--background-secondary);
+    border: 1px solid #D1C4E9; /* Borde lavanda suave */
     border-radius: 4px;
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
+    background-color: #fff; /* Fondo blanco para campos */
+    color: #6F6F6F; /* Texto gris claro */
 }
 
 .form-group button.submit-btn {
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: #9575CD; /* Fondo lavanda vibrante */
+    color: #fff; /* Texto blanco */
     font-weight: bold;
     border: none;
     cursor: pointer;
@@ -56,7 +56,7 @@
 }
 
 .form-group button.submit-btn:hover {
-    background-color: var(--accent-secondary);
+    background-color: #7E57C2; /* Fondo morado más oscuro en hover */
 }
 
 /* Estilo para el scrollbar */
@@ -65,13 +65,13 @@
 }
 
 .content::-webkit-scrollbar-track {
-    background: var(--background-secondary);
+    background: #D1C4E9; /* Fondo lavanda suave */
 }
 
 .content::-webkit-scrollbar-thumb {
-    background-color: var(--accent-primary);
+    background-color: #9575CD; /* Fondo lavanda vibrante */
     border-radius: 10px;
-    border: 3px solid var(--background-secondary);
+    border: 3px solid #D1C4E9; /* Borde lavanda suave */
 }
 
 .messages {
@@ -86,20 +86,20 @@
 }
 
 .alert-error {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
+    color: #a94442; /* Texto rojo */
+    background-color: #f2dede; /* Fondo rojo claro */
+    border-color: #ebccd1; /* Borde rojo suave */
 }
 
 .alert-success {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
+    color: #3c763d; /* Texto verde */
+    background-color: #dff0d8; /* Fondo verde claro */
+    border-color: #d6e9c6; /* Borde verde suave */
 }
 
 /* Estilo general del contenedor de cambio de contraseña */
 .password-change-container {
-    background-color: var(--background-primary);
+    background-color: #F3F3FF; /* Fondo lavanda claro */
     padding: 20px;
     border-radius: 8px;
     max-width: 600px; /* Ajustar el ancho máximo del contenedor */
@@ -113,19 +113,23 @@
     max-width: 400px; /* Limitar el ancho máximo de los inputs */
     padding: 10px;
     font-size: 16px;
-    border: 1px solid var(--background-secondary);
+    border: 1px solid #D1C4E9; /* Borde lavanda suave */
     border-radius: 4px;
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
+    background-color: #fff; /* Fondo blanco */
 }
+/* Asegurando que el h1 en el contenedor de cambio de contraseña tenga un color lavanda oscuro */
+.password-change-container h1 {
+    color: #6A4C92; /* Lavanda oscuro */
+}
+
 
 /* Botón de envío */
 .password-form button.submit-btn {
     width: 100%;
     max-width: 400px;
     padding: 10px;
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: #9575CD; /* Fondo lavanda vibrante */
+    color: #fff; /* Texto blanco */
     font-weight: bold;
     border: none;
     border-radius: 4px;
@@ -135,14 +139,14 @@
 
 /* Para el hover del botón */
 .password-form button.submit-btn:hover {
-    background-color: var(--accent-secondary);
+    background-color: #7E57C2; /* Fondo morado más oscuro en hover */
 }
 
 /* Estilo para los errores del formulario */
 .password-hints ul {
     list-style-type: none;
     padding-left: 0;
-    color: var(--text-secondary);
+    color: #9575CD; /* Texto lavanda */
     font-size: 14px;
     margin-top: 15px;
 }
@@ -162,11 +166,11 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: var(--text-secondary);
+    color: #9575CD; /* Texto lavanda */
 }
 
 .password-wrapper .password-toggle:hover {
-    color: var(--accent-primary);
+    color: #7E57C2; /* Lavanda oscuro al hacer hover */
 }
 
 .password-actions {
@@ -182,12 +186,12 @@
 
 .password-icon {
     cursor: pointer;
-    color: var(--text-secondary);
+    color: #9575CD; /* Lavanda */
     font-size: 18px;
     padding: 5px;
     transition: color 0.3s ease;
 }
 
 .password-icon:hover {
-    color: var(--accent-primary);
+    color: #7E57C2; /* Lavanda oscuro en hover */
 }

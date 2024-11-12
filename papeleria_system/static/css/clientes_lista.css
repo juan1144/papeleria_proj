@@ -1,16 +1,18 @@
 /* Estilo general para la vista de clientes */
 .clients-container {
     padding: 20px;
-    background-color: var(--background-primary);
-    color: var(--text-primary);
+    background-color: #E6E6FA;  /* Lavanda claro */
+    color: #4B0082;  /* Índigo oscuro para texto */
     border-radius: 8px;
 }
 
 .clients-container h1 {
     font-size: 24px;
     margin-bottom: 20px;
+    color: #6A5ACD;  /* Título en un lavanda más oscuro */
 }
 
+/* Formulario de filtros */
 .filter-form {
     display: flex;
     flex-wrap: wrap;
@@ -21,22 +23,29 @@
 .filter-form input[type="text"],
 .filter-form input[type="email"] {
     padding: 10px;
-    border: 1px solid var(--background-secondary);
+    border: 1px solid #D8BFD8;  /* Lavanda claro para bordes */
     border-radius: 4px;
     width: 100%;
     max-width: 200px;
+    background-color: #F8F8FF;  /* Fondo muy suave en lavanda */
+    color: #4B0082;  /* Texto en color lavanda oscuro */
 }
 
 .filter-form button {
     padding: 10px 20px;
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: #D8BFD8;  /* Lavanda claro para botón */
+    color: #4B0082;  /* Texto lavanda oscuro */
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
+.filter-form button:hover {
+    background-color: #6A5ACD;  /* Hover en lavanda más oscuro */
+}
+
+/* Tabla de clientes */
 .clients-table {
     width: 100%;
     border-collapse: collapse;
@@ -46,30 +55,33 @@
 .clients-table th, .clients-table td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid var(--background-secondary);
+    border-bottom: 1px solid #D8BFD8;  /* Bordes lavanda claro */
+    color: #6A5ACD;  /* Texto lavanda oscuro */
 }
 
 .clients-table th {
-    background-color: var(--background-secondary);
+    background-color: #D8BFD8;  /* Fondo de encabezados en lavanda claro */
 }
 
 .clients-table tr:nth-child(even) {
-    background-color: var(--background-tertiary);
+    background-color: #F8F8FF;  /* Fondo muy claro lavanda para filas pares */
 }
 
 .clients-table tr:hover {
-    background-color: var(--background-hover);
+    background-color: #E6E6FA;  /* Fondo lavanda más suave en hover */
 }
 
 .clients-table td a {
-    color: var(--accent-primary);
+    color: #6A5ACD;  /* Enlaces en lavanda oscuro */
     text-decoration: none;
 }
 
 .clients-table td a:hover {
     text-decoration: underline;
+    color: #4B0082;  /* Hover de enlaces en lavanda más oscuro */
 }
 
+/* Paginación */
 .pagination {
     margin-top: 20px;
     display: flex;
@@ -83,22 +95,22 @@
 
 .pagination a {
     padding: 10px;
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
+    background-color: #D8BFD8;  /* Fondo lavanda claro para los enlaces */
+    color: #4B0082;  /* Texto lavanda oscuro */
     text-decoration: none;
     border-radius: 4px;
     transition: background-color 0.3s ease;
 }
 
 .pagination a:hover {
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: #6A5ACD;  /* Hover en lavanda más oscuro */
+    color: #FFFFFF;  /* Texto blanco al hacer hover */
 }
 
 .pagination .current {
     padding: 10px;
-    background-color: var(--background-secondary);
-    color: var(--text-secondary);
+    background-color: #D8BFD8;  /* Fondo de la página actual en lavanda claro */
+    color: #4B0082;  /* Texto lavanda oscuro */
     border-radius: 4px;
 }
 
@@ -119,14 +131,15 @@
 .filter-group label {
     font-weight: bold;
     margin-bottom: 5px;
+    color: #6A5ACD;  /* Etiquetas en lavanda oscuro */
 }
 
 .filter-group input {
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #D8BFD8;  /* Bordes lavanda claro */
     border-radius: 4px;
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
+    background-color: #F8F8FF;  /* Fondo lavanda claro */
+    color: #4B0082;  /* Texto lavanda oscuro */
 }
 
 /* Botón de búsqueda y de limpiar filtros */
@@ -139,13 +152,13 @@
 
 .clear-button {
     padding: 8px 16px;
-    background-color: #ff4d4d;
-    color: white;
+    background-color: #FFB6C1;  /* Rosado suave */
+    color: #4B0082;  /* Texto en lavanda oscuro */
     text-decoration: none;
     border-radius: 4px;
     transition: background-color 0.3s ease;
 }
 
 .clear-button:hover {
-    background-color: #e60000;
+    background-color: #FF69B4;  /* Rosado fuerte */
 }

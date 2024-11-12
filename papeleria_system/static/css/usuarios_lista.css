@@ -1,8 +1,22 @@
 /* Estilo general para la vista de usuarios */
+
+/* Definición de las variables de color */
+:root {
+    --background-primary: #f3e6ff; /* Lavanda suave */
+    --background-secondary: #d1b3ff; /* Lavanda intermedio */
+    --background-tertiary: #e6ccff; /* Lavanda más claro */
+    --background-hover: #b38aff; /* Hover, lavanda oscuro */
+    --text-primary: black; /* Texto principal oscuro */
+    --text-secondary: #6a4e77; /* Texto secundario en tono morado */
+    --accent-primary: #9c66cc; /* Morado para acentos */
+    --text-button: #ffffff; /* Color blanco para botones */
+}
+
+/* Estilo para el contenedor principal */
 .users-container {
     padding: 20px;
-    background-color: var(--background-primary);
-    color: var(--text-primary);
+    background-color: var(--background-primary); /* Fondo principal lavanda suave */
+    color: var(--text-primary); /* Texto oscuro */
     border-radius: 8px;
     max-height: 90vh;  /* Limitar el alto del contenedor a un 90% del viewport */
     overflow-y: auto;  /* Activar el scrollbar vertical si el contenido excede el alto */
@@ -24,7 +38,7 @@
 .filter-form input[type="text"],
 .filter-form select {
     padding: 10px;
-    border: 1px solid var(--background-secondary);
+    border: 1px solid var(--background-secondary); /* Borde de los inputs en lavanda intermedio */
     border-radius: 4px;
     width: 100%;
     max-width: 200px;
@@ -32,8 +46,8 @@
 
 .filter-form button {
     padding: 10px 20px;
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: var(--accent-primary); /* Fondo morado de los botones */
+    color: var(--text-button); /* Texto blanco de los botones */
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -49,28 +63,28 @@
 .users-table th, .users-table td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid var(--background-secondary);
+    border-bottom: 1px solid var(--background-secondary); /* Borde inferior en lavanda intermedio */
 }
 
 .users-table th {
-    background-color: var(--background-secondary);
+    background-color: var(--background-secondary); /* Fondo de los encabezados de columna */
 }
 
 .users-table tr:nth-child(even) {
-    background-color: var(--background-tertiary);
+    background-color: var(--background-tertiary); /* Fondo de filas pares */
 }
 
 .users-table tr:hover {
-    background-color: var(--background-hover);
+    background-color: var(--background-hover); /* Fondo al pasar el cursor sobre las filas */
 }
 
 .users-table td a {
-    color: var(--accent-primary);
+    color: var(--accent-primary); /* Enlace en color morado */
     text-decoration: none;
 }
 
 .users-table td a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* Subrayado al pasar el cursor */
 }
 
 .pagination {
@@ -86,22 +100,22 @@
 
 .pagination a {
     padding: 10px;
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
+    background-color: var(--background-secondary); /* Fondo de los enlaces de paginación */
+    color: var(--text-primary); /* Texto en color oscuro */
     text-decoration: none;
     border-radius: 4px;
     transition: background-color 0.3s ease;
 }
 
 .pagination a:hover {
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: var(--accent-primary); /* Fondo morado al pasar el cursor */
+    color: var(--text-primary); /* Color de texto al pasar el cursor */
 }
 
 .pagination .current {
     padding: 10px;
-    background-color: var(--background-secondary);
-    color: var(--text-secondary);
+    background-color: var(--background-secondary); /* Fondo de la página actual */
+    color: var(--text-secondary); /* Texto en tono morado suave */
     border-radius: 4px;
 }
 
@@ -115,7 +129,7 @@
 
 .clear-button {
     padding: 8px 16px;
-    background-color: #ff4d4d;
+    background-color: #ff4d4d; /* Fondo rojo claro para el botón de limpiar filtros */
     color: white;
     text-decoration: none;
     border-radius: 4px;
@@ -123,20 +137,20 @@
 }
 
 .clear-button:hover {
-    background-color: #e60000;
+    background-color: #e60000; /* Fondo rojo oscuro al pasar el cursor */
 }
 
-/*Scrollbar*/
+/* Estilo del scrollbar */
 .users-container::-webkit-scrollbar {
     width: 10px;
 }
 
 .users-container::-webkit-scrollbar-track {
-    background: var(--background-secondary);
+    background: var(--background-secondary); /* Fondo del track en lavanda intermedio */
 }
 
 .users-container::-webkit-scrollbar-thumb {
-    background-color: var(--accent-primary);
+    background-color: var(--accent-primary); /* Fondo del thumb en morado */
     border-radius: 10px;
-    border: 2px solid var(--background-secondary);
+    border: 2px solid var(--background-secondary); /* Borde del thumb en lavanda intermedio */
 }

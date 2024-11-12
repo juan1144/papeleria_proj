@@ -7,7 +7,7 @@
 
 /* Contenedor específico del formulario */
 .client-form-container {
-    background-color: var(--background-primary);
+    background-color: #F3F3FF; /* Fondo lavanda claro */
     padding: 20px;
     border-radius: 8px;
     max-width: 800px;
@@ -18,7 +18,7 @@
 .client-form-container h1 {
     text-align: center;
     font-size: 22px;
-    color: var(--text-primary);
+    color: #4B4B4B; /* Texto gris oscuro */
     margin-bottom: 25px;
 }
 
@@ -30,7 +30,7 @@
 
 .form-group label {
     font-weight: bold;
-    color: var(--text-secondary);
+    color: #4B4B4B; /* Texto gris oscuro para las etiquetas */
     margin-bottom: 5px;
 }
 
@@ -40,10 +40,10 @@
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid var(--background-secondary);
+    border: 1px solid #D1C4E9; /* Borde lavanda suave */
     border-radius: 4px;
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
+    background-color: #fff; /* Fondo blanco */
+    color: #4B4B4B; /* Texto gris oscuro */
 }
 
 .form-group input[type="date"] {
@@ -52,8 +52,8 @@
 }
 
 .form-group button.submit-btn {
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: #9575CD; /* Fondo lavanda vibrante */
+    color: #fff; /* Texto blanco */
     font-weight: bold;
     border: none;
     cursor: pointer;
@@ -61,7 +61,7 @@
 }
 
 .form-group button.submit-btn:hover {
-    background-color: var(--accent-secondary);
+    background-color: #7E57C2; /* Fondo morado en hover */
 }
 
 .client-form-container .form-group {
@@ -79,13 +79,13 @@
 }
 
 .content::-webkit-scrollbar-track {
-    background: var(--background-secondary);
+    background: #E6E6FA; /* Fondo lavanda suave para el track */
 }
 
 .content::-webkit-scrollbar-thumb {
-    background-color: var(--accent-primary);
+    background-color: #B39DDB; /* Thumb morado claro */
     border-radius: 10px;
-    border: 3px solid var(--background-secondary);
+    border: 3px solid #E6E6FA; /* Borde lavanda suave */
 }
 
 .messages {
@@ -100,13 +100,13 @@
 }
 
 .alert-error {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
+    color: #a94442; /* Texto rojo oscuro */
+    background-color: #f2dede; /* Fondo rojo claro */
+    border-color: #ebccd1; /* Borde rojo claro */
 }
 
 .alert-success {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
+    color: #3c763d; /* Texto verde oscuro */
+    background-color: #dff0d8; /* Fondo verde claro */
+    border-color: #d6e9c6; /* Borde verde suave */
 }

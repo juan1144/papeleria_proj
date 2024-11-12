@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
 
 :root {
-  --drawer: #16191C;
+  --drawer: #7f279e;
   --text-primary: #FFFFFF;
-  --text-secondary: #86909A;
-  --text-faded: #C3C5C7;
-  --background-primary: #22272B;
-  --background-secondary: #374148;
+  --text-secondary: #FFFFFF;
+  --text-faded: #7c9dbe;
+  --background-primary: #2a0072;
+  --background-secondary: #3207b5;
   --accent-primary: rgba(54,80,209,1);
 }
 
@@ -64,17 +64,17 @@ html, body {
 }
 
 .menu a, .menu .menu-item {
-  display: flex;  /* Cambiado de block a flex para mejor control del contenido */
+  display: flex;  
   align-items: center;
-  justify-content: center;  /* Centra los iconos dentro de cada enlace */
-  width: 100%;  /* Asegura que el enlace ocupe todo el ancho del sidebar */
+  justify-content: center;  
+  width: 100%;  
   height: 50px;
   text-align: center;
   color: var(--text-primary);
   font-size: 25px;
   opacity: 0.6;
   transition: all 0.22s ease;
-  box-sizing: border-box;  /* Incluye padding y border en el ancho total */
+  box-sizing: border-box;  
 }
 
 .menu a.active {

@@ -83,11 +83,9 @@ def reportes_productos_mas_vendidos(request):
         total_ganancias=Sum((F('precio') - F('producto__precio_compra')) * F('cantidad'), output_field=FloatField())
     ).order_by('-cantidad_vendida')[:6]  # Selecciona los 6 productos más vendidos
 
-    # Preparar los datos para el gráfico de barras
     productos = [venta['producto__nombre'] for venta in ventas]
     cantidades = [venta['cantidad_vendida'] for venta in ventas]
 
-    # Asegurarse de que las fechas se formateen en 'yyyy-MM-dd'
     context = {
         'ventas': ventas,
         'fecha_desde': fecha_desde.strftime('%Y-%m-%d'),

@@ -1,8 +1,20 @@
+/* Definición de las variables de color */
+:root {
+    --background-primary: #f3e6ff; /* Lavanda suave */
+    --background-secondary: #d1b3ff; /* Lavanda intermedio */
+    --background-tertiary: #e6ccff; /* Lavanda más claro */
+    --background-hover: #b38aff; /* Hover, lavanda oscuro */
+    --text-primary: black; /* Texto principal oscuro */
+    --text-secondary: black; /* Texto secundario en tono morado */
+    --accent-primary: #9c66cc; /* Morado para acentos */
+    --text-button: #ffffff; /* Color blanco para botones */
+}
+
 /* Estilo general para la vista de productos */
 .products-container {
     padding: 20px;
-    background-color: var(--background-primary);
-    color: var(--text-primary);
+    background-color: var(--background-primary); /* Fondo principal */
+    color: var(--text-primary); /* Color de texto principal */
     border-radius: 8px;
 }
 
@@ -21,7 +33,7 @@
 .filter-form input[type="text"],
 .filter-form select {
     padding: 10px;
-    border: 1px solid var(--background-secondary);
+    border: 1px solid var(--background-secondary); /* Borde secundario */
     border-radius: 4px;
     width: 100%;
     max-width: 200px;
@@ -29,8 +41,8 @@
 
 .filter-form button {
     padding: 10px 20px;
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: var(--accent-primary); /* Fondo de los botones */
+    color: var(--text-button); /* Color del texto en los botones */
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -46,28 +58,28 @@
 .products-table th, .products-table td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid var(--background-secondary);
+    border-bottom: 1px solid var(--background-secondary); /* Borde inferior de celdas */
 }
 
 .products-table th {
-    background-color: var(--background-secondary);
+    background-color: var(--background-secondary); /* Fondo de los encabezados de tabla */
 }
 
 .products-table tr:nth-child(even) {
-    background-color: var(--background-tertiary);
+    background-color: var(--background-tertiary); /* Fondo para filas pares */
 }
 
 .products-table tr:hover {
-    background-color: var(--background-hover);
+    background-color: var(--background-hover); /* Fondo de fila al pasar el cursor */
 }
 
 .products-table td a {
-    color: var(--accent-primary);
+    color: var(--accent-primary); /* Color de los enlaces */
     text-decoration: none;
 }
 
 .products-table td a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* Subrayado en los enlaces al pasar el cursor */
 }
 
 .pagination {
@@ -83,22 +95,22 @@
 
 .pagination a {
     padding: 10px;
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
+    background-color: var(--background-secondary); /* Fondo de los botones de paginación */
+    color: var(--text-primary); /* Color del texto en los botones */
     text-decoration: none;
     border-radius: 4px;
     transition: background-color 0.3s ease;
 }
 
 .pagination a:hover {
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
+    background-color: var(--accent-primary); /* Fondo de los botones de paginación al hacer hover */
+    color: var(--text-button); /* Color del texto al hacer hover */
 }
 
 .pagination .current {
     padding: 10px;
-    background-color: var(--background-secondary);
-    color: var(--text-secondary);
+    background-color: var(--background-secondary); /* Fondo del botón de paginación activa */
+    color: var(--text-secondary); /* Color de texto del botón activo */
     border-radius: 4px;
 }
 
@@ -125,8 +137,8 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: var(--background-secondary);
-    color: var(--text-primary);
+    background-color: var(--background-secondary); /* Fondo secundario para los inputs */
+    color: var(--text-primary); /* Color del texto en los inputs */
 }
 
 /* Botón de búsqueda y de limpiar filtros */
@@ -139,13 +151,13 @@
 
 .clear-button {
     padding: 8px 16px;
-    background-color: #ff4d4d;
-    color: white;
+    background-color: #ff4d4d; /* Fondo rojo de limpiar */
+    color: white; /* Texto blanco */
     text-decoration: none;
     border-radius: 4px;
     transition: background-color 0.3s ease;
 }
 
 .clear-button:hover {
-    background-color: #e60000;
+    background-color: #e60000; /* Oscurecer el fondo al hacer hover */
 }
